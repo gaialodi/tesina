@@ -3,6 +3,44 @@
 </head>
 
 <body>
+
+
+<div id="User">
+<script>
+// Check browser support
+if (typeof(Storage) !== "undefined") {
+  // Store
+  localStorage.setItem("Username", "Marco");
+} 
+else {
+  document.getElementById("User").innerHTML = "Sorry, your browser does not support Web Storage...";
+}
+
+</script>
+</div>
+
+<div id="Pw">
+<script>
+// Check browser support
+if (typeof(Storage) !== "undefined") {
+  // Store
+  localStorage.setItem("Password", "1234");
+} 
+else {
+  document.getElementById("Pw").innerHTML = "Sorry, your browser does not support Web Storage...";
+}
+
+</script>
+</div>
+
+<script>
+Pw_Admin=(localStorage.getItem("Password"));
+User_Admin=(localStorage.getItem("Username"));
+
+document.write(Pw_Admin)
+document.write(User_Admin)
+
+</script>
 <h1></h1>
 </body>
 </html>
