@@ -11,11 +11,32 @@
 
 <style>
 #log{
+position:0px;
+padding-top:0px;
+margin-top:0px;
+background-color:lightblue;
 visibility: hidden;
+font: montserrat;
+font-size: 12px;
 }
 
-.bg-rose{
-background-color:Mistyrose;
+.navbar {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border: 0;
+  border-radius: 0;
+  margin-bottom: 0;
+  font: montserrat;
+  font-size: 12px;
+  letter-spacing: 5px;
+}
+
+.tbn{
+background-color:MistyRose;
+border-right:1px solid !important;
+margin-right:2px solid;
+padding-right:2px solid;
+
 }
 
 </style>
@@ -59,6 +80,7 @@ background-color:Mistyrose;
 
 </head>
 
+<body style="background-color:MistyRose;">
 <body>
 
 <nav class="navbar navbar-inverse navbar-default">
@@ -80,20 +102,42 @@ background-color:Mistyrose;
   </div>
 </nav>
 
-<div class="container-fluid text-center bg-rose">
-<p><h3>Benvenuto nella pagina della Prefettura!</h3></p>
-<p>Se sei un utente registrato puoi fare il login cliccando il pulsante in alto a sinistra per inserire o consultare dati sugli eventi nella provincia di Reggio Emilia</p>
-</div>
-
-<div id="log" class="container">
-	 
+<div id="log" class="container-fluid">
 	    <label for="Userame"><b>Username</b></label>
 	    <input type="text" id="User" placeholder="Enter Username" name="username" required>
 
 	    <label for="psw"><b>Password</b></label>
 	    <input type="password" id="Password" placeholder="Enter Password" name="psw" required>
 	    <button type="submit" onclick="check()">Login</button><br>
-	    
+</div>
+
+<div class="container-fluid text-center">
+<p><h3>Benvenuto nella pagina della Prefettura!</h3></p>
+<p>Se sei un utente registrato puoi fare il login cliccando il pulsante in alto a sinistra per inserire o consultare dati sugli eventi nella provincia di Reggio Emilia</p>
+</div>
+
+<div class="container-fluid text-center bg-green">
+<p><h3>Charts</h3></p>
+<div class="row">
+	<div id="tbn" class="col-sm-3">	 	
+		Eventi svolti (Qui vogliamo mettere la somma degli eventi svolti)
+		
+	</div>
+	<div id="tbn" class="col-sm-3">
+		Studenti coinvolti 
+		
+ 	</div>
+ 	<div id="tbn" class="col-sm-3">
+ 		Ore totale di eventi
+ 		
+ 	</div>
+ 	<div id="tbn" class="col-sm-3">	
+ 		Tema più trattato 	
+		
+	</div>
+	
+</div>
+
 </div>
 
 
@@ -114,6 +158,8 @@ background-color:Mistyrose;
 
 
 </div>
+
+
 
 
 </body>
