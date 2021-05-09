@@ -8,7 +8,7 @@
 $(document).ready(function(){
  $('#load_data').click(function(){
   $.ajax({
-   src:"employee.csv",
+   url:"employee.csv",
    dataType:"text",
    success:function(data)
    {
@@ -54,5 +54,10 @@ $(document).ready(function(){
     </div>
    </div>
   </div>
+  
+  <tr><td id="0,0" onclick="move()"><span></span></td><td id="0,1" onclick="move()"><span></span></td><td id="0,2" onclick="move()"><span></span></td></tr>
+<tr><td id="1,0" onclick="move()"><span></span></td><td id="1,1" onclick="move()"><span></span></td><td id="1,2" onclick="move()"><span></span></td></tr>
+<tr><td id="2,0" onclick="move()"><span></span></td><td id="2,1" onclick="move()"><span></span></td><td id="2,2" onclick="move()"><span></span></td></tr>
+  
  </body>
 </html>
