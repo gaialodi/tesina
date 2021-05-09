@@ -9,21 +9,51 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
 
+<style>
+#log{
+visibility: hidden;
+}
+
+.bg-rose{
+background-color:Mistyrose;
+}
+
+</style>
+
 <script>
 
 //funzione di login
-function login(){
 	
-	document.write("Inserisci username e password")
+	localStorage.setItem("Username","Marco")
+	localStorage.setItem("Password","1234")
+
+	Admin=(localStorage.getItem("Username"))
+	Pw=(localStorage.getItem("Password"))
+
+	var access=false
 	
-}
 
-
-
-
-
-
-
+	function login(){
+	$(document).ready(function(){
+		$("#log").css("visibility","visible")
+		//$("#log").show()
+	})
+	}
+	
+	function check(){
+		x=document.getElementById("User").value
+		   y=document.getElementById("Password").value
+		    if(x==Admin||y==Pw)
+		    {
+			   console.log("Login successful")
+		       access=true
+		    }
+		$(document).ready(function(){
+			$("#log").css("visibility","hidden")
+			//$("#log").show()
+		})
+	}
+   
 
 </script>
 
@@ -34,7 +64,9 @@ function login(){
 <nav class="navbar navbar-inverse navbar-default">
   <div class="container">
     <div class="navbar-header ">
-      <li><a class="navbar-brand" href="#" onclick="login()">Login</a></li>
+      <li> 
+      <a class="navbar-brand" onclick="login()">Login</a>
+      </li>
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
@@ -48,12 +80,40 @@ function login(){
   </div>
 </nav>
 
-<h1>Tesina 2021</h1>
-<p><h3>Eventi</h3></p>
-<p><h3>Scuole</h3></p>
-<p> Parole chiave o tag</p>
-boh perchè non funziona
+<div class="container-fluid text-center bg-rose">
+<p><h3>Benvenuto nella pagina della Prefettura!</h3></p>
+<p>Se sei un utente registrato puoi fare il login cliccando il pulsante in alto a sinistra per inserire o consultare dati sugli eventi nella provincia di Reggio Emilia</p>
+</div>
 
+<div id="log" class="container">
+	 
+	    <label for="Userame"><b>Username</b></label>
+	    <input type="text" id="User" placeholder="Enter Username" name="username" required>
+
+	    <label for="psw"><b>Password</b></label>
+	    <input type="password" id="Password" placeholder="Enter Password" name="psw" required>
+	    <button type="submit" onclick="check()">Login</button><br>
+	    
+</div>
+
+
+<div class="container-fluid text-center bg-green">
+<p><h3>Eventi</h3></p>
+
+
+</div>
+
+<div class="container-fluid text-center bg-green">
+<p><h3>Scuole</h3></p>
+
+
+</div>
+
+<div class="container-fluid text-center bg-green">
+<p><h5>Cerca per parole chiave</h5></p>
+
+
+</div>
 
 
 </body>
