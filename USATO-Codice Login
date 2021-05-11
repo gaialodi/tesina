@@ -1,0 +1,31 @@
+localStorage.setItem("Username","Marco")
+localStorage.setItem("Password","1234")
+
+Admin=(localStorage.getItem("Username"))
+Pw=(localStorage.getItem("Password"))
+
+var access=false
+
+function Login()
+{
+    
+   x=document.getElementById("User").value
+   y=document.getElementById("Password").value
+    if(x==Admin||y==Pw)
+    {
+	   console.log("Login successful")
+       access=true
+    }
+}
+
+
+
+<div class="container">
+ 
+    <label for="Userame"><b>Username</b></label>
+    <input type="text" id="User" placeholder="Enter Username" name="username" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" id="Password" placeholder="Enter Password" name="psw" required>
+    <button type="submit" onclick="Login()">Login</button><br>
+</div>
