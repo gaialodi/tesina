@@ -43,6 +43,8 @@ padding-right:2px solid;
 </style>
 
 <script type="text/javascript">
+
+		//Diagramma per vedere gli ANNI e quanti eventi ogni anno
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawVisualization);
 
@@ -70,6 +72,39 @@ padding-right:2px solid;
        
         chart.draw(data, options);
       }
+      
+      //Mappa per visualizzare scuola/e
+        google.charts.load('current', {
+        'packages':['map'],
+        // Note: you will need to get a mapsApiKey for your project.
+        // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+        'mapsApiKey': 'AIzaSyCm3QmfA6xK-2Tsfs02mMtAMz7e2QgxODE' 
+        }) 
+        
+        google.charts.setOnLoadCallback(geolocalize);
+      
+      function geolocalize(){
+    	  navigator.geolocation.getCurrentPosition(drawChart)
+    	  
+    	  drawChart()
+    	  
+      }
+      
+      function drawChart(position) {
+        var data = google.visualization.arrayToDataTable([
+          ['Lat', 'Long', 'Name'],
+          [position.coords.latitude, position.coords.longitude, 'My Position'],
+
+        ]);
+
+        var map = new google.visualization.Map(document.getElementById('map_div'));
+        map.draw(data, {
+          showTooltip: true,
+          showInfoWindow: true
+        });
+      }
+      
+      
     </script>
 
 <script>
@@ -190,11 +225,11 @@ padding-right:2px solid;
 
 <div class="container-fluid text-center">
 <p><h3>Scuole</h3></p>
-
+<div id="map_div" style="width: 800px; height: 600px"></div>
 
 </div>
 
-<div class="container-fluid text-center bg-green">
+<div class="container-fluid text-center">
 <p><h5>Cerca per parole chiave</h5></p>
 
 
