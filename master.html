@@ -9,6 +9,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
 
 <!-- #log modifica la barra di login
@@ -20,13 +22,24 @@
 <style>
 
 #log{
-position:0px;
-padding-top:0px;
+width: 325px;
+height: 105px;
+position: absolute;
+left: 375px;
+padding-top:5px;
 margin-top:0px;
-background-color:lightblue;
+border-left: solid;
+border-width: 7px;
+background-color: #78b3eb;
 visibility: hidden;
 font: montserrat;
-font-size: 12px;
+font-size: 14px;
+ margin-left: auto;
+ margin-top: 0px;
+}
+
+.navbar-brand {
+	cursor: pointer;
 }
 
 .navbar {
@@ -83,7 +96,7 @@ border-right:1px solid !important;
         chart.draw(data, options);
       }
       
-      //Mappa per visualizzare scuola/e
+     /* //Mappa per visualizzare scuola/e IO LA CANCELLEREI
         google.charts.load('current', {
         'packages':['map'],
         // Note: you will need to get a mapsApiKey for your project.
@@ -113,7 +126,7 @@ border-right:1px solid !important;
           showInfoWindow: true
         });
       }
-      
+      */
       
     </script>
 
@@ -137,6 +150,13 @@ border-right:1px solid !important;
 	})
 	}
 	
+	function hide(){
+	$(document).ready(function(){
+		$("#log").css("visibility","hidden")
+		//$("#log").hide()
+	})
+	}
+	
 	function check(){
 		x=document.getElementById("User").value
 		   y=document.getElementById("Password").value
@@ -149,6 +169,22 @@ border-right:1px solid !important;
 			$("#log").css("visibility","hidden")
 			//$("#log").show()
 		})
+	}
+	
+	var lat=44.7007475271964;
+	var long=10.633781921287271;
+	
+	function mappa(){
+		var map = L.map('map').setView([44.7007, 10.6337], 13);
+
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(map);
+
+		L.marker([lat, long]).addTo(map)
+		    .bindPopup('Istituto ScaruffiLeviTricolore.<br>Tutti i tuoi eventi sono qui')
+		    .openPopup();
+		
 	}
    
 
@@ -179,12 +215,16 @@ border-right:1px solid !important;
 </nav>
 
 <div id="log" class="container-fluid">
-	    <label for="Userame"><b>Username</b></label>
-	    <input type="text" id="User" placeholder="Enter Username" name="username" required>
+	    <label for="username" style="width:80px;"><b> Username </b></label>
+		<input type="text" id="User" placeholder="Enter Username" name="username" required>
+		<br />
 
-	    <label for="psw"><b>Password</b></label>
-	    <input type="password" id="Password" placeholder="Enter Password" name="psw" required>
-	    <button type="submit" onclick="check()">Login</button><br>
+	    <label for="psw" style="width:80px;"><b> Password </b></label>
+		<input type="password" id="Password" placeholder="Enter Password" name="psw" required>
+		<br />
+
+	    <button type="submit" onclick="check()" class="btn btn-success" style="position: absolute; left: 25%; margin-top: 5px;">Login</button> 
+		<button type="button" onclick="hide()" class="btn btn-danger" align="center" style="position: absolute; left: 50%; margin-top: 5px;">Cancel</button><br>
 </div>
 
 <div class="container-fluid text-center">
@@ -236,6 +276,14 @@ border-right:1px solid !important;
 <div class="container-fluid text-center">
 <p><h3>Scuole</h3></p>
 <div id="map_div" style="width: 800px; height: 600px"></div>
+
+<div id="map" style="width: 800px; height: 600px"></div>
+<!-- c'è il modo di visualizzare la mappa direttamente senza fare click? come si mette id? -->
+<div>Mappa 
+<button onclick="mappa()">Visualizza la mappa</button></div>
+
+
+
 
 </div>
 
