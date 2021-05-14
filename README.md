@@ -7,3 +7,6 @@ Memorizzazione dati opzioni
 
 Visualizzazione mappa:
 https://developers.google.com/chart/interactive/docs/gallery/map
+
+Servono probabilmente 4 file:
+master,html, login.jsp, loginAdmin.jsp e home.jsp
