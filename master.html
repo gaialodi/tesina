@@ -20,13 +20,24 @@
 <style>
 
 #log{
-position:0px;
-padding-top:0px;
+width: 325px;
+height: 105px;
+position: absolute;
+left: 375px;
+padding-top:5px;
 margin-top:0px;
-background-color:lightblue;
+border-left: solid;
+border-width: 7px;
+background-color: #78b3eb;
 visibility: hidden;
 font: montserrat;
-font-size: 12px;
+font-size: 14px;
+ margin-left: auto;
+ margin-top: 0px;
+}
+
+.navbar-brand {
+	cursor: pointer;
 }
 
 .navbar {
@@ -137,6 +148,13 @@ border-right:1px solid !important;
 	})
 	}
 	
+	function hide(){
+	$(document).ready(function(){
+		$("#log").css("visibility","hidden")
+		//$("#log").hide()
+	})
+	}
+	
 	function check(){
 		x=document.getElementById("User").value
 		   y=document.getElementById("Password").value
@@ -179,12 +197,16 @@ border-right:1px solid !important;
 </nav>
 
 <div id="log" class="container-fluid">
-	    <label for="Userame"><b>Username</b></label>
-	    <input type="text" id="User" placeholder="Enter Username" name="username" required>
+	    <label for="username" style="width:80px;"><b> Username </b></label>
+		<input type="text" id="User" placeholder="Enter Username" name="username" required>
+		<br />
 
-	    <label for="psw"><b>Password</b></label>
-	    <input type="password" id="Password" placeholder="Enter Password" name="psw" required>
-	    <button type="submit" onclick="check()">Login</button><br>
+	    <label for="psw" style="width:80px;"><b> Password </b></label>
+		<input type="password" id="Password" placeholder="Enter Password" name="psw" required>
+		<br />
+
+	    <button type="submit" onclick="check()" class="btn btn-success" style="position: absolute; left: 25%; margin-top: 5px;">Login</button> 
+		<button type="button" onclick="hide()" class="btn btn-danger" align="center" style="position: absolute; left: 50%; margin-top: 5px;">Cancel</button><br>
 </div>
 
 <div class="container-fluid text-center">
