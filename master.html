@@ -53,36 +53,6 @@ font-size: 14px;
   letter-spacing: 5px;
 }
 
-.article {
-			-moz-transform: translateY(0.25rem);
-			-webkit-transform: translateY(0.25rem);
-			-ms-transform: translateY(0.25rem);
-			transform: translateY(0.25rem);
-			-moz-transition: opacity 0.325s ease-in-out, -moz-transform 0.325s ease-in-out;
-			-webkit-transition: opacity 0.325s ease-in-out, -webkit-transform 0.325s ease-in-out;
-			-ms-transition: opacity 0.325s ease-in-out, -ms-transform 0.325s ease-in-out;
-			transition: opacity 0.325s ease-in-out, transform 0.325s ease-in-out;
-			padding: 4.5rem 2.5rem 1.5rem 2.5rem ;
-			position: relative;
-			width: 40rem;
-			max-width: 100%;
-			background-color: rgba(27, 31, 34, 0.85);
-			border-radius: 4px;
-			opacity: 0;
-		}
-
-.article{
-	display: block;}
-
-.a {
-		-moz-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
-		-webkit-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
-		-ms-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
-		transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
-		border-bottom: dotted 1px rgba(255, 255, 255, 0.5);
-		text-decoration: none;
-		color: inherit;
-	}
 
 .body{
 background-color:MistyRose;
@@ -92,6 +62,185 @@ padding-right:2px solid;
 
 .tbn{
 border-right:1px solid !important;
+}
+
+.counter_wrapper,
+.counter_wrapper_below {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  width: 100%;
+  margin: auto;
+}
+
+.counter_wrapper_below {
+  width: 680px;
+  height: 190px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.col_1,
+.col_2,
+.col_3,
+.col_4,
+.col_5_top,
+.col_6_top,
+.col_7_top {
+  width: 14%;
+  text-align: center;
+  background-color:MistyRose;
+  vertical-align: top;
+}
+
+.col_5,
+.col_6,
+.col_7 {
+  width: 33%;
+  text-align: center;
+  background-color: #f7f6f2;
+  vertical-align: top;
+}
+
+.filetto_verticale_top {
+  border-right: 1px solid rgba(31, 34, 38, 0.5);
+}
+
+.filetto_verticale_top_dotted {
+  border-right: 1px dotted rgba(31, 34, 38, 0.5);
+}
+
+hr.filetto_verticale {
+  border-top: 1px solid rgba(31, 34, 38, 0.5);
+  height: 100px;
+}
+
+#num_1,
+#variazione_1,
+#total_1 {
+  color: #f38384;
+}
+
+#num_3,
+#variazione_3,
+#total_3 {
+  color: #19b290;
+}
+
+#num_4,
+#variazione_4,
+#total_4 {
+  color: #ef4e63;
+}
+
+#num_5_top,
+#variazione_5_top,
+#total_5_top {
+  color: #f38384;
+}
+
+#num_6_top,
+#variazione_6_top,
+#total_6_top {
+  color: #f38384;
+}
+
+#num_7_top,
+#variazione_7_top,
+#total_7_top {
+  color: #f38384;
+}
+
+#num_5_top,
+#num_6_top,
+#num_7_top {
+  font-weight: 400;
+}
+
+#num_5,
+#variazione_5,
+#total_5 {
+  color: #ef4e63;
+}
+
+#num_6,
+#variazione_6,
+#total_6 {
+  color: #aa0438;
+}
+
+#num_7,
+#variazione_7,
+#total_7 {
+  color: #f38384;
+}
+
+.timer {
+  font-family: "SoleSans", Arial, Helvetica, sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  line-height: 0.8;
+  letter-spacing: normal;
+  color: rgba(15, 15, 15, 0.8);
+  margin: 15px 0;
+  font-size: 48px;
+}
+
+.timer_below {
+  font-family: "SoleSans", Arial, Helvetica, sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  line-height: 0.8;
+  letter-spacing: normal;
+  color: rgba(15, 15, 15, 0.8);
+  margin: 15px 0;
+  font-size: 50px;
+}
+
+.count-text {
+  font-family: "SoleSans", Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  color: rgba(15, 15, 15, 0.8);
+  margin: 0px;
+  font-size: 14px;
+}
+
+.count-text_var {
+  font-family: "SoleSans", Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.1;
+  letter-spacing: normal;
+  color: rgba(15, 15, 15, 0.8);
+  margin: 0px;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.count-text_total {
+  font-family: "SoleSans", Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.1;
+  letter-spacing: normal;
+  color: rgba(15, 15, 15, 0.8);
+  margin: 0px;
+  font-size: 16px;
 }
 
 </style>
@@ -269,12 +418,12 @@ border-right:1px solid !important;
 <ul>
 <li><a href="#Spiegazione"></a>Spiegazione</li>
 <li><a href="#DatiEGrafici"></a>Dati e grafici</li>
-<li><a href="#Eventi"></a>Eventi</li>
-<li><a href="#Scuole"></a>Scuole</li>
+<li><a href="#Eventi"></a>Eventi</li><li><a href="#Scuole"></a>Scuole</li>
+
 <li><a href="#Mappa"></a>Mappa</li>
 
 </ul>
-
+<
 <article id="Spiegazione">
 <div class="container-fluid text-center">
 <h2>Spiegazione</h2>
@@ -283,28 +432,71 @@ border-right:1px solid !important;
 
 <article id="DatiEGrafici">
 <div class="container-fluid text-center">
-<p><h3>Data</h3></p>
-<div class="row">
-	<div id="tbn" class="col-sm-3">	 	
-		Eventi svolti (Qui vogliamo mettere la somma degli eventi svolti)
-		
+<p><h3>DATI RACCOLTI</h3></p>
+
+<!-- CONTATORE -->
+	<div class="counter_wrapper">
+		<div class="counter col_4 filetto_verticale_top">
+			<p class="count-text" id="count_text_4">EVENTI<br>SVOLTI
+			</p>
+			<h2 class="timer count-number" id="num_4"><span id="eventi_svolti" ></span></h2>
+			
+		</div>
+
+
+
+		<div class="counter col_2 filetto_verticale_top">
+			<p class="count-text" id="count_text_2">STUDENTI<br>PARTECIPANTI<br></p>
+			<h2 class="timer count-number" id="num_2">+182</h2>
+			<p class="count-text_var" id="variazione_2">
+				+0,15%
+			</p>
+			<p class="count-text_total" id="total_2">Totali&nbsp;
+				123.927			</p>
+		</div>
+
+
+
+		<div class="counter col_3 filetto_verticale_top">
+			<p class="count-text" id="count_text_3">SCUOLA PIU VIRTUOSA<br></p>
+			<h2 class="timer count-number" id="num_3">+13.782</h2>
+			<p class="count-text_var" id="variazione_3">
+				+0,38%
+			</p>
+			<p class="count-text_total" id="total_3">Totali&nbsp;
+				3.683.189			</p>
+		</div>
+
+
+
+		<div class="counter col_1 filetto_verticale_top_dotted">
+			<p class="count-text" id="count_text_1">TEMA<br>PRINCIPALE
+			</p>
+			<h2 class="timer count-number" id="num_1">-6.402</h2>
+			<p class="count-text_var" id="variazione_1">
+				-1,85%
+			</p>
+			<p class="count-text_total" id="total_1">Totali&nbsp;
+				339.606			</p>
+		</div>
+
+
+		<div class="counter col_6_top filetto_verticale_top_dotted">
+			<p class="count-text" id="count_text_6_top">TERAPIA<br>INTENSIVA</p>
+			<h2 class="timer count-number" id="num_6_top">-33</h2>
+			<p class="count-text_var" id="variazione_6_top">
+				-1,74%
+			</p>
+			<p class="count-text_total" id="total_6_top">Totali&nbsp;
+				1.860			</p>
+		</div>
 	</div>
-	<div id="tbn" class="col-sm-3">
-		<span id="numero_studenti" ></span>  
-		Studenti coinvolti 
-		
- 	</div>
- 	<div id="tbn" class="col-sm-3">
-		<span id="ore"></span>
- 		Ore totale di eventi
- 		
- 	</div>
- 	<div id="tbn" class="col-sm-3">	
- 		Tema più trattato 	
-		
-	</div>
-	
-</div>
+	<!-- FINE A CONTATORE -->
+
+
+
+
+
 </div>
 </article>
 
