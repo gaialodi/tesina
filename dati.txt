@@ -1,0 +1,16 @@
+A.S.;Scuola;Comune;Via;Grado ;Titolo Progetto;Periodo;;Soggetto  Formatore;numero ore;numero studenti  coinvolti;età partecipanti;;Parola chiave;;;;;;;;;;;;
+;;;;di Istruzione;;Da;a;;;;da;a;;;;;;;;;;;;;
+2018/2019;"I.T. ""Scaruffi Levi  Tricolore""";Reggio Emilia;Via Filippo Re, 8 Via Pascal, 79 (Rivalta);Secondaria di II grado;A spasso nel web;nov-18;feb-19;Esperto esterno  (A. Soda);72;288;13;15;bullismo/cyberbullismo;;;;;;;;;;;;
+2018/2019;"I.T. ""Scaruffi Levi  Tricolore""";Reggio Emilia;Via Filippo Re, 8 Via Pascal, 79 (Rivalta);Secondaria di II grado;Educazione alla salute:  prevenzione fumo, alcol,  primo soccorso;Ottobre 2018;Maggio 2019;Docenti di Scienze  motorie dell'Istituto;;;13;19;droghe/alcol;;;;;;;;;;;;
+2018/2019;"I.T. ""Scaruffi Levi  Tricolore""";Reggio Emilia;Via Filippo Re, 8 Via Pascal, 79 (Rivalta);Secondaria di II grado;Free student box;Gennaio 2019;Giugno 2019;"Psicologa dell'Associazione  ""Amici di Gancio originale""";;;13;19;relazioni/emozioni;;;;;;;;;;;;
+2018/2019;"I.T. ""Scaruffi Levi  Tricolore""";Reggio Emilia;Via Filippo Re, 8 Via Pascal, 79 (Rivalta);Secondaria di II grado;Comportamenti e relazioni  nell'adolescente;Marzo 2019;Aprile 2019;"Esperti dell'Associazione  ""Non da sola""";66;264;14;16;relazioni/emozioni;;;;;;;;;;;;
+2018/2019;"I.T. ""Scaruffi Levi  Tricolore""";Reggio Emilia;Via Filippo Re, 8 Via Pascal, 79 (Rivalta);Secondaria di II grado;Uomini in fuga;nov-18;Giugno 2019;"Esperti dell'Associazione ""Il granello di senapa""";;;17;19;razzismo;;;;;;;;;;;;
+2018/2019;"I.T. ""Scaruffi Levi  Tricolore""";Reggio Emilia;Via Filippo Re, 8 Via Pascal, 79 (Rivalta);Secondaria di II grado;Educazione alla legalità;;;Esperti di provenienza varia;;;14;19;legalità;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+2019/2020;"I.T. ""Scaruffi Levi  Tricolore""";Reggio Emilia;Via Filippo Re, 8 Via Pascal, 79 (Rivalta);Secondaria di II grado;Free student box;Gennaio 2019;Giugno 2019;"Psicologa dell'Associazione  ""Amici di Gancio originale""";;;13;19;relazioni/emozioni;;;;;;;;;;;;
+2019/2020;"I.T. ""Scaruffi Levi  Tricolore""";Reggio Emilia;Via Filippo Re, 8 Via Pascal, 79 (Rivalta);Secondaria di II grado;Uomini in fuga;nov-18;Giugno 2019;"Esperti dell'Associazione ""Il granello di senapa""";;;17;19;razzismo;;;;;;;;;;;;
+2019/2020;"I.T. ""Scaruffi Levi  Tricolore""";Reggio Emilia;Via Filippo Re, 8 Via Pascal, 79 (Rivalta);Secondaria di II grado;Educazione alla legalità;;;Esperti di provenienza varia;;;14;19;legalità;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+2020/2021;"I.T. ""Scaruffi Levi  Tricolore""";Reggio Emilia;Via Filippo Re, 8 Via Pascal, 79 (Rivalta);Secondaria di II grado;Free student box;Gennaio 2019;Giugno 2019;"Psicologa dell'Associazione  ""Amici di Gancio originale""";;;13;19;relazioni/emozioni;;;;;;;;;;;;
+2020/2021;"I.T. ""Scaruffi Levi  Tricolore""";Reggio Emilia;Via Filippo Re, 8 Via Pascal, 79 (Rivalta);Secondaria di II grado;Uomini in fuga;nov-18;Giugno 2019;"Esperti dell'Associazione ""Il granello di senapa""";;;17;19;razzismo;;;;;;;;;;;;
+2020/2021;"I.T. ""Scaruffi Levi  Tricolore""";Reggio Emilia;Via Filippo Re, 8 Via Pascal, 79 (Rivalta);Secondaria di II grado;Educazione alla legalità;;;Esperti di provenienza varia;;;14;19;legalità;;;;;;;;;;;;
