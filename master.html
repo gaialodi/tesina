@@ -53,6 +53,37 @@ font-size: 14px;
   letter-spacing: 5px;
 }
 
+.article {
+			-moz-transform: translateY(0.25rem);
+			-webkit-transform: translateY(0.25rem);
+			-ms-transform: translateY(0.25rem);
+			transform: translateY(0.25rem);
+			-moz-transition: opacity 0.325s ease-in-out, -moz-transform 0.325s ease-in-out;
+			-webkit-transition: opacity 0.325s ease-in-out, -webkit-transform 0.325s ease-in-out;
+			-ms-transition: opacity 0.325s ease-in-out, -ms-transform 0.325s ease-in-out;
+			transition: opacity 0.325s ease-in-out, transform 0.325s ease-in-out;
+			padding: 4.5rem 2.5rem 1.5rem 2.5rem ;
+			position: relative;
+			width: 40rem;
+			max-width: 100%;
+			background-color: rgba(27, 31, 34, 0.85);
+			border-radius: 4px;
+			opacity: 0;
+		}
+
+.article{
+	display: block;}
+
+.a {
+		-moz-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+		-webkit-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+		-ms-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+		transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+		border-bottom: dotted 1px rgba(255, 255, 255, 0.5);
+		text-decoration: none;
+		color: inherit;
+	}
+
 .body{
 background-color:MistyRose;
 margin-right:2px solid;
@@ -194,6 +225,7 @@ border-right:1px solid !important;
 
 <body style="background-color:MistyRose;">
 <body>
+<div id="main">
 
 <nav class="navbar navbar-inverse navbar-default">
   <div class="container">
@@ -214,24 +246,40 @@ border-right:1px solid !important;
   </div>
 </nav>
 
-<div id="log" class="container-fluid">
-	    <label for="username" style="width:80px;"><b> Username </b></label>
+
+	<div id="log" class="container-fluid">
+    	<label for="username" style="width:80px;"><b> Username </b></label>
 		<input type="text" id="User" placeholder="Enter Username" name="username" required>
 		<br />
-
-	    <label for="psw" style="width:80px;"><b> Password </b></label>
+    	<label for="psw" style="width:80px;"><b> Password </b></label>
 		<input type="password" id="Password" placeholder="Enter Password" name="psw" required>
 		<br />
-
-	    <button type="submit" onclick="check()" class="btn btn-success" style="position: absolute; left: 25%; margin-top: 5px;">Login</button> 
+    	<button type="submit" onclick="check()" class="btn btn-success" style="position: absolute; left: 25%; margin-top: 5px;">Login</button> 
 		<button type="button" onclick="hide()" class="btn btn-danger" align="center" style="position: absolute; left: 50%; margin-top: 5px;">Cancel</button><br>
-</div>
+	</div>
 
+	
+	<div class="container-fluid text-center">
+		<p><h3>Benvenuto nella pagina della Prefettura!</h3></p>
+		<p>Se sei un utente registrato puoi fare il login cliccando il pulsante in alto a sinistra per inserire o consultare dati sugli eventi nella provincia di Reggio Emilia</p>
+	</div>
+	
+<ul>
+<li><a href="#Spiegazione"></a>Spiegazione</li>
+<li><a href="#DatiEGrafici"></a>Dati e grafici</li>
+<li><a href="#Eventi"></a>Eventi</li>
+<li><a href="#Scuole"></a>Scuole</li>
+<li><a href="#Mappa"></a>Mappa</li>
+
+</ul>
+
+<article id="Spiegazione">
 <div class="container-fluid text-center">
-<p><h3>Benvenuto nella pagina della Prefettura!</h3></p>
-<p>Se sei un utente registrato puoi fare il login cliccando il pulsante in alto a sinistra per inserire o consultare dati sugli eventi nella provincia di Reggio Emilia</p>
+<h2>Spiegazione</h2>
 </div>
+</article>
 
+<article id="DatiEGrafici">
 <div class="container-fluid text-center">
 <p><h3>Data</h3></p>
 <div class="row">
@@ -253,8 +301,9 @@ border-right:1px solid !important;
 	</div>
 	
 </div>
-
 </div>
+</article>
+
 
 <div class="container-fluid text-center">
 <p><h3>Charts</h3></p>
@@ -267,34 +316,36 @@ border-right:1px solid !important;
 
 </div>
 
+<article id="Eventi">
 <div class="container-fluid text-center">
 <p><h3>Eventi</h3></p>
-
-
 </div>
+</article>
 
+<article id="Scuole">
 <div class="container-fluid text-center">
 <p><h3>Scuole</h3></p>
 <div id="map_div" style="width: 800px; height: 600px"></div>
+</article>
 
+
+<article id="Mappa">
 <div id="map" style="width: 800px; height: 600px"></div>
 <!-- c'è il modo di visualizzare la mappa direttamente senza fare click? come si mette id? -->
 <div>Mappa 
 <button onclick="mappa()">Visualizza la mappa</button></div>
-
-
-
-
 </div>
+</article>
 
+
+<article id="Mappa">
 <div class="container-fluid text-center">
 <p><h5>Cerca per parole chiave</h5></p>
 
+</div>
+</article>
+
 
 </div>
-
-
-
-
 </body>
 </html>
