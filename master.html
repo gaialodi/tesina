@@ -246,16 +246,22 @@ font-size: 20px;
 
 </style>
 
+<!-- GRAFICO -->
 <script type="text/javascript">
 
 		//Diagramma per vedere gli ANNI e quanti eventi ogni anno
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawVisualization);
+      let data=localStorage.getItem("Eventi_letti")
+      //for(let i=0;i<data.length;i++)
+    	 // {
+    	 // document.write(data[i].Scuola)
+    	 // }
 
       function drawVisualization() {
         // Some raw data (not necessarily accurate)
         var data = google.visualization.arrayToDataTable([
-          ['Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average'],
+          ['Year', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average'],
           ['2004/05',  165,      938,         522,             998,           450,      614.6],
           ['2005/06',  135,      1120,        599,             1268,          288,      682],
           ['2006/07',  157,      1167,        587,             807,           397,      623],
@@ -265,8 +271,8 @@ font-size: 20px;
 
         var options = {
           title : 'Monthly Coffee Production by Country',
-          vAxis: {title: 'Cups'},
-          hAxis: {title: 'Month'},
+          vAxis: {title: 'Quantity'},
+          hAxis: {title: 'Year'},
           seriesType: 'bars',
           series: {5: {type: 'line'}},
           chartArea:{left:20,right:20,top:0,width:'50%',height:'75%'}
@@ -276,38 +282,6 @@ font-size: 20px;
        
         chart.draw(data, options);
       }
-      
-     /* //Mappa per visualizzare scuola/e IO LA CANCELLEREI
-        google.charts.load('current', {
-        'packages':['map'],
-        // Note: you will need to get a mapsApiKey for your project.
-        // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
-        'mapsApiKey': 'AIzaSyCm3QmfA6xK-2Tsfs02mMtAMz7e2QgxODE' 
-        }) 
-        
-        google.charts.setOnLoadCallback(geolocalize);
-      
-      function geolocalize(){
-    	  navigator.geolocation.getCurrentPosition(drawChart)
-    	  
-    	  drawChart()
-    	  
-      }
-      
-      function drawChart(position) {
-        var data = google.visualization.arrayToDataTable([
-          ['Lat', 'Long', 'Name'],
-          [position.coords.latitude, position.coords.longitude, 'My Position'],
-
-        ]);
-
-        var map = new google.visualization.Map(document.getElementById('map_div'));
-        map.draw(data, {
-          showTooltip: true,
-          showInfoWindow: true
-        });
-      }
-      */
       
     </script>
 
@@ -440,7 +414,7 @@ font-size: 20px;
 		<div class="counter col_4 filetto_verticale_top">
 			<p class="count-text" id="count_text_4">EVENTI<br>SVOLTI
 			</p>
-			<h2 class="timer count-number" id="num_4"><span id="eventi_svolti" ></span></h2>
+			<h2 class="timer count-number" id="num_4"><span id="contatore_eventi" ></span></h2>
 			
 		</div>
 
@@ -448,24 +422,15 @@ font-size: 20px;
 
 		<div class="counter col_2 filetto_verticale_top">
 			<p class="count-text" id="count_text_2">STUDENTI<br>PARTECIPANTI<br></p>
-			<h2 class="timer count-number" id="num_2">+182</h2>
-			<p class="count-text_var" id="variazione_2">
-				+0,15%
+			<h2 class="timer count-number" id="num_2"><span id="numero_studenti" ></span></h2>
 			</p>
-			<p class="count-text_total" id="total_2">Totali&nbsp;
-				123.927			</p>
 		</div>
 
 
 
 		<div class="counter col_3 filetto_verticale_top">
-			<p class="count-text" id="count_text_3">SCUOLA PIU VIRTUOSA<br></p>
-			<h2 class="timer count-number" id="num_3">+13.782</h2>
-			<p class="count-text_var" id="variazione_3">
-				+0,38%
-			</p>
-			<p class="count-text_total" id="total_3">Totali&nbsp;
-				3.683.189			</p>
+			<p class="count-text" id="count_text_3">SCUOLA<br>VIRTUOSA<br></p>
+			<h2 class="timer count-number" id="num_3"><span id="scuola" ></span></h2>
 		</div>
 
 
@@ -473,23 +438,13 @@ font-size: 20px;
 		<div class="counter col_1 filetto_verticale_top_dotted">
 			<p class="count-text" id="count_text_1">TEMA<br>PRINCIPALE
 			</p>
-			<h2 class="timer count-number" id="num_1">-6.402</h2>
-			<p class="count-text_var" id="variazione_1">
-				-1,85%
-			</p>
-			<p class="count-text_total" id="total_1">Totali&nbsp;
-				339.606			</p>
+			<h2 class="timer count-number" id="num_1"><span id="tema_trattato" ></span></h2>
 		</div>
 
 
 		<div class="counter col_6_top filetto_verticale_top_dotted">
-			<p class="count-text" id="count_text_6_top">TERAPIA<br>INTENSIVA</p>
-			<h2 class="timer count-number" id="num_6_top">-33</h2>
-			<p class="count-text_var" id="variazione_6_top">
-				-1,74%
-			</p>
-			<p class="count-text_total" id="total_6_top">Totali&nbsp;
-				1.860			</p>
+			<p class="count-text" id="count_text_6_top">ORE<br>SVOLTE</p>
+			<h2 class="timer count-number" id="num_6_top"><span id="ore" ></span></h2>
 		</div>
 	</div>
 	<!-- FINE A CONTATORE -->
