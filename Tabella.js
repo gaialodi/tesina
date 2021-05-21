@@ -166,29 +166,25 @@ let a=document.getElementById("scuola");
 	a.innerText= chiave
 
 }
-function data_visualization()
-{
-	//Diagramma per vedere gli ANNI e quanti eventi ogni anno
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawVisualization);
+function drawVisualization() {
+		
+		google.charts.load('current', {'packages':['corechart']});
+       google.charts.setOnLoadCallback(drawVisualization);
        let cont=0;
-       var studenti = new Array();
-	   var numero_ore = new Array();
-	   var eventi_svolti = new Array();
+       let studenti = new Array();
+	   let numero_ore = new Array();
+	   let eventi_svolti = 0;
 	   
       for(let a=0;a<eventi.length;a++)
       {
-      		studenti[a].push(Number(eventi[a].numero_studenti_coinvolti));
-			numero_ore[a].push(Number(eventi[a].numero_ore));
-			eventi_svolti[a].push(eventi[a].length);
+      		studenti.push(Number(eventi[a].numero_studenti_coinvolti));
+			numero_ore.push(Number(eventi[a].numero_ore));
+			eventi_svolti.push(eventi[a].length);
 
       }
-      
-
-      function drawVisualization() {
-		var table = new Array()
-		var years = new Array('2018/2019', '2019/2020', '2020/2021', '2021/2022')
-        var data = google.visualization.arrayToDataTable([
+		let table = new Array()
+		let years = new Array('2018/2019', '2019/2020', '2020/2021', '2021/2022')
+        let data = google.visualization.arrayToDataTable([
           ['Year', 'Studenti coinvolti', 'Numero ore', 'Eventi svolti'],    
         ]);
 		
@@ -203,11 +199,10 @@ function data_visualization()
           seriesType: 'bars',
           series: {5: {type: 'line'}},
           chartArea:{left:20,right:20,top:0,width:'50%',height:'75%'},
-        };
+        }
+        
 
         var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
        
         chart.draw(data, options);
       }
-	
-	}
