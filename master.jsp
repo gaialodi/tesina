@@ -224,20 +224,18 @@ border-right:1px solid !important;
 <body style="background-color:MistyRose;">
 <body>
 <%
-login login0 = new login(); 
-String user = login0.getUs(); //quello che metto nel form in login0
-String pw =login0.getPw();
+//login login0 = new login(); 
+//String user = login0.getUs(); //quello che metto nel form in login0
+//String pw =login0.getPw();
 //user = request.getParameter("username");
 // pw = request.getParameter("password");
 
-if(user != null){ //qui dovrei controllare la password ma come si faaaaaaaa
+//if(user != null){ //qui dovrei controllare la password ma come si faaaaaaaa
 
-	if(session.getAttribute("user") ==null){
-		response.sendRedirect("login0.jsp");
-	}else{
-		user=(String)session.getAttribute("user");
-	}
-		
+String user=(String)session.getAttribute("username");
+String us=(String)session.getAttribute("usDB");
+String pw=(String)session.getAttribute("pwDB");
+boolean admin=(boolean)session.getAttribute("admDB");
 	
 %>
 
@@ -265,14 +263,15 @@ if(user != null){ //qui dovrei controllare la password ma come si faaaaaaaa
 
 <% 
 //accedo a UserService
-UserService usServ = UserServiceFactory.getUserService();
+//UserService usServ = UserServiceFactory.getUserService();
 
 //accedo al nickname dell'utente
-String u = usServ.getCurrentUser().getNickname(); //questo è l'username?
+//String u = usServ.getCurrentUser().getNickname(); //questo è l'username?
 
 //se username e pw sono giusti voglio andare in un'altra pagina che mi dice che non posso entrare perchè le credenziali sono sbagliate
 %>
-<h3>Ciao ${username}</h3>
+<h3>Ciao <%=user%></h3>
+<h3>Stringa che esce dalla query. pw:<%=pw%> uername:<%=user%></h3>
 <h3>Sei nel master.jsp</h3>
 
 	
@@ -375,17 +374,22 @@ String u = usServ.getCurrentUser().getNickname(); //questo è l'username?
 </article>
 
 <p><h5>Vedi password utenti</h5></p>
-<%login0.list(); %>
+
 
 </div>
 </article>
-
-
 </div>
 
-<%}else{%>
-	<h5>Se vuoi consultare il sito della prefettura devi eseguire il login</h5>
-	
+<%if(admin==true){ %>
+<h5>Inserisci i dati dell'utente che vuoi aggiunere</h5>
+<!-- DEVO MANDARLO A login.java, facendo una servlet di quello -->
+<form method="post" id="newUser" action="/helloTesina01">
+<label for="username" style="width:80px"><b>Username</b></label>
+<input type="text" id="User" placeholder="Enter Username" name="username" required><br/>
+<label for="psw" style="width:80px;"><b> Password </b></label>
+<input type="password" id="Password" placeholder="Enter Password" name="password" required><br/>
+</form>
 <%}%>
+
 </body>
 </html>
