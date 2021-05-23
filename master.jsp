@@ -1,6 +1,13 @@
 <html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="Tiw2021.Tesina00.HelloAppEngine" %>
+<%@ page import ="java.util.*" %>
+<%@ page import= "com.google.appengine.api.users.*" %>
+<%@ page import="Tiw2021.Tesina00.*" %>
+<%@ page import="Tiw2021.Tesina00.login" %>
+	
 <head>
-<title>Prefettura e adolescenza di Gaia, Andrea, Federico e Gabriele</title>
+<title>Prefettura e adolescenza</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -12,13 +19,10 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
-
 <!-- #log modifica la barra di login
 .navbar modifica la barra di navigazione (in alto)
-.body modifica tutto quello che c'è sotto alla barra di navigazione
-
-
--->
+.body modifica tutto quello che c'è sotto alla barra di navigazione -->
+	
 <style>
 
 #log{
@@ -289,15 +293,14 @@ font-size: 20px;
 
 //funzione di login
 	
-	localStorage.setItem("Username","Marco")
-	localStorage.setItem("Password","1234")
+	//localStorage.setItem("Username","Marco")
+	//localStorage.setItem("Password","1234")
 
-	Admin=(localStorage.getItem("Username"))
-	Pw=(localStorage.getItem("Password"))
+	//Admin=(localStorage.getItem("Username"))
+	//Pw=(localStorage.getItem("Password"))
 
-	var access=false
+	//var access=false
 	
-
 	function login(){
 	$(document).ready(function(){
 		$("#log").css("visibility","visible")
@@ -341,6 +344,11 @@ font-size: 20px;
 		    .openPopup();
 		
 	}
+	
+	function getUser(){
+		String u= new String();
+		u=getParameter(u);
+	}
    
 
 </script>
@@ -349,29 +357,52 @@ font-size: 20px;
 
 <body style="background-color:MistyRose;">
 <body>
-<div id="main">
-<input id="picker" type="file">
-<script src="LETTURA_CODICE.js" ></script>
+	<%
+	//login login0 = new login(); 
+	//String user = login0.getUs(); //quello che metto nel form in login0
+	//String pw =login0.getPw();
+	//user = request.getParameter("username");
+	// pw = request.getParameter("password");
+	//if(user != null){ //qui dovrei controllare la password ma come si faaaaaaaa
+	String user=(String)session.getAttribute("username");
+	String us=(String)session.getAttribute("usDB");
+	String pw=(String)session.getAttribute("pwDB");
+	boolean admin=(boolean)session.getAttribute("admDB");
+	%>
+	
+	<div id="main">
+	<input id="picker" type="file">
+	<script src="LETTURA_CODICE.js" ></script>
 
-<nav class="navbar navbar-inverse navbar-default">
-  <div class="container">
-    <div class="navbar-header ">
-      <li> 
-      <a class="navbar-brand" onclick="login()">Login</a>
-      </li>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right text-gray">
-    <li><a href="#">ME</a></li>
-      <li><a href="#">WHO</a></li>
-      <li><a href="#">WHAT</a></li>
-      <li><a href="#">WHERE</a></li>
-    </ul>
-  </div>
-</nav>
-
+	<nav class="navbar navbar-inverse navbar-default">
+  	<div class="container">
+   	 <div class="navbar-header ">
+   	   <li> 
+   	   <a class="navbar-brand" onclick="login()">Login</a>
+   	   </li>
+   	 </div>
+   	 <ul class="nav navbar-nav">
+   	   <li class="active"><a href="#">Home</a></li>
+ 	 </ul>
+    	 <ul class="nav navbar-nav navbar-right text-gray">
+    		<li><a href="#Spiegazione">Spiegazione</a></li>
+      		<li><a href="#DatiEGrafici">Dati e Grafici</a></li>
+    		<li><a href="#Eventi">Eventi</a></li>
+      		<li><a href="#Mappa">Mappa</a></li>
+    	</ul>
+  	</div>
+	</nav>
+	
+	<% 
+	//accedo a UserService
+	//UserService usServ = UserServiceFactory.getUserService();
+	//accedo al nickname dell'utente
+	//String u = usServ.getCurrentUser().getNickname(); //questo è l'username?
+	//se username e pw sono giusti voglio andare in un'altra pagina che mi dice che non posso entrare perchè le credenziali sono sbagliate
+	%>
+	<h3>Ciao <%=user%></h3>
+	<h3>Stringa che esce dalla query. pw:<%=pw%> uername:<%=user%></h3>
+	<h3>Sei nel master.jsp</h3>
 
 	<div id="log" class="container-fluid">
     	<label for="username" style="width:80px;"><b> Username </b></label>
@@ -387,18 +418,10 @@ font-size: 20px;
 	
 	<div class="container-fluid text-center">
 		<p><h3>Benvenuto nella pagina della Prefettura!</h3></p>
-		<p>Se sei un utente registrato puoi fare il login cliccando il pulsante in alto a sinistra per inserire o consultare dati sugli eventi nella provincia di Reggio Emilia</p>
+		<p>TOGLIERE Se sei un utente registrato puoi fare il login cliccando il pulsante in alto a sinistra per inserire o consultare dati sugli eventi nella provincia di Reggio Emilia</p>
 	</div>
 	
-<ul>
-<li><a href="#Spiegazione"></a>Spiegazione</li>
-<li><a href="#DatiEGrafici"></a>Dati e grafici</li>
-<li><a href="#Eventi"></a>Eventi</li><li><a href="#Scuole"></a>Scuole</li>
 
-<li><a href="#Mappa"></a>Mappa</li>
-
-</ul>
-<
 <article id="Spiegazione">
 <div class="container-fluid text-center">
 <h2>Spiegazione</h2>
@@ -497,6 +520,34 @@ font-size: 20px;
 </div>
 </article>
 
+<!-- VISIBILE SOLO AGLI AMMINISTRATORI -->
+
+<article id="Aggiungi utente">
+<div class="container-fluid text-center">
+
+<p><h5>Aggiungi utente</h5></p>
+
+
+</div>
+</article>
+
+<p><h5>Vedi password utenti</h5></p>
+
+
+</div>
+</article>
+</div>
+
+<%if(admin==true){ %>
+<h5>Inserisci i dati dell'utente che vuoi aggiunere</h5>
+<!-- DEVO MANDARLO A login.java, facendo una servlet di quello -->
+<form method="post" id="newUser" action="/helloTesina01">
+<label for="username" style="width:80px"><b>Username</b></label>
+<input type="text" id="User" placeholder="Enter Username" name="username" required><br/>
+<label for="psw" style="width:80px;"><b> Password </b></label>
+<input type="password" id="Password" placeholder="Enter Password" name="password" required><br/>
+</form>
+<%}%>
 
 </div>
 </body>
