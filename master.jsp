@@ -17,7 +17,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
 
 <!-- #log modifica la barra di login
 .navbar modifica la barra di navigazione (in alto)
@@ -25,22 +30,6 @@
 	
 <style>
 
-#log{
-width: 325px;
-height: 105px;
-position: absolute;
-left: 375px;
-padding-top:5px;
-margin-top:0px;
-border-left: solid;
-border-width: 7px;
-background-color: #78b3eb;
-visibility: hidden;
-font: montserrat;
-font-size: 14px;
- margin-left: auto;
- margin-top: 0px;
-}
 
 .navbar-brand {
 	cursor: pointer;
@@ -301,13 +290,6 @@ font-size: 20px;
 
 	//var access=false
 	
-	function login(){
-	$(document).ready(function(){
-		$("#log").css("visibility","visible")
-		//$("#log").show()
-	})
-	}
-	
 	function hide(){
 	$(document).ready(function(){
 		$("#log").css("visibility","hidden")
@@ -333,10 +315,15 @@ font-size: 20px;
 	var long=10.633781921287271;
 	
 	function mappa(){
-		var map = L.map('map').setView([44.7007, 10.6337], 13);
+		var map = new L.map('map').setView([44.7007, 10.6337], 13);
 
-		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-		    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+		    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+		    maxZoom: 18,
+		    id: 'mapbox/streets-v11',
+		    tileSize: 512,
+		    zoomOffset: -1,
+		    accessToken: 'your.mapbox.access.token'
 		}).addTo(map);
 
 		L.marker([lat, long]).addTo(map)
@@ -347,7 +334,7 @@ font-size: 20px;
 	
 	function getUser(){
 		String u= new String();
-		u=getParameter(u);
+		//u=getParameter(u);
 	}
    
 
@@ -385,10 +372,11 @@ font-size: 20px;
    	   <li class="active"><a href="#">Home</a></li>
  	 </ul>
     	 <ul class="nav navbar-nav navbar-right text-gray">
-    		<li><a href="#Spiegazione">Spiegazione</a></li>
-      		<li><a href="#DatiEGrafici">Dati e Grafici</a></li>
-    		<li><a href="#Eventi">Eventi</a></li>
-      		<li><a href="#Mappa">Mappa</a></li>
+    		<li><a href="#Spiegazione">SPIEGAZIONE</a></li>
+      		<li><a href="#Dati">DATI</a></li>
+      		<li><a href="#Grafici">GRAFICI</a></li>
+    		<li><a href="#Eventi">EVENTI</a></li>
+      		<li><a href="#Mappa">MAPPA</a></li>
     	</ul>
   	</div>
 	</nav>
@@ -400,36 +388,27 @@ font-size: 20px;
 	//String u = usServ.getCurrentUser().getNickname(); //questo è l'username?
 	//se username e pw sono giusti voglio andare in un'altra pagina che mi dice che non posso entrare perchè le credenziali sono sbagliate
 	%>
-	<h3>Ciao <%=user%></h3>
-	<h3>Stringa che esce dalla query. pw:<%=pw%> uername:<%=user%></h3>
+	<h3>Stringa che esce dalla query. pw:<%=pw%> username:<%=user%> admin:<%=admin%></h3>
 	<h3>Sei nel master.jsp</h3>
-
-	<div id="log" class="container-fluid">
-    	<label for="username" style="width:80px;"><b> Username </b></label>
-		<input type="text" id="User" placeholder="Enter Username" name="username" required>
-		<br />
-    	<label for="psw" style="width:80px;"><b> Password </b></label>
-		<input type="password" id="Password" placeholder="Enter Password" name="psw" required>
-		<br />
-    	<button type="submit" onclick="check()" class="btn btn-success" style="position: absolute; left: 25%; margin-top: 5px;">Login</button> 
-		<button type="button" onclick="hide()" class="btn btn-danger" align="center" style="position: absolute; left: 50%; margin-top: 5px;">Cancel</button><br>
-	</div>
-
 	
 	<div class="container-fluid text-center">
-		<p><h3>Benvenuto nella pagina della Prefettura!</h3></p>
-		<p>TOGLIERE Se sei un utente registrato puoi fare il login cliccando il pulsante in alto a sinistra per inserire o consultare dati sugli eventi nella provincia di Reggio Emilia</p>
+		<p><h3>Benvenuto <%=user%> nella pagina della Prefettura!</h3></p>
+		<p>Qui puoi inserire o consultare dati sugli eventi nella provincia di Reggio Emilia</p>
+		<%if(admin==true){ %>
+		<p>per aggiungere un utenre vai in fondo alla pagina</p>
+		<%}%>
 	</div>
 	
 
 <article id="Spiegazione">
-<div class="container-fluid text-center">
+<div class="container-fluid text-center" style=" height: 100px;">
 <h2>Spiegazione</h2>
+io la toglierei e metterei un'introduzione sotto al "Benvenuto" by Gaia
 </div>
 </article>
 
-<article id="DatiEGrafici">
-<div class="container-fluid text-center">
+<article id="Dati">
+<div class="container-fluid text-center" >
 <p><h3>DATI RACCOLTI</h3></p>
 
 <!-- CONTATORE -->
@@ -441,29 +420,22 @@ font-size: 20px;
 			
 		</div>
 
-
-
 		<div class="counter col_2 filetto_verticale_top">
 			<p class="count-text" id="count_text_2">STUDENTI<br>PARTECIPANTI<br></p>
 			<h2 class="timer count-number" id="num_2"><span id="numero_studenti" ></span></h2>
 			</p>
 		</div>
 
-
-
 		<div class="counter col_3 filetto_verticale_top">
 			<p class="count-text" id="count_text_3">SCUOLA<br>VIRTUOSA<br></p>
 			<h2 class="timer count-number" id="num_3"><span id="scuola" ></span></h2>
 		</div>
-
-
 
 		<div class="counter col_1 filetto_verticale_top_dotted">
 			<p class="count-text" id="count_text_1">TEMA<br>PRINCIPALE
 			</p>
 			<h2 class="timer count-number" id="num_1"><span id="tema_trattato" ></span></h2>
 		</div>
-
 
 		<div class="counter col_6_top filetto_verticale_top_dotted">
 			<p class="count-text" id="count_text_6_top">ORE<br>SVOLTE</p>
@@ -473,13 +445,11 @@ font-size: 20px;
 	<!-- FINE A CONTATORE -->
 
 
-
-
-
 </div>
 </article>
 
 
+<article id="Grafici">
 <div class="container-fluid text-center">
 <p><h3>Charts</h3></p>
 <div class="row">
@@ -487,58 +457,55 @@ font-size: 20px;
 		<div id="chart_div" style="width: 1000px; height: 500px; "></div>
 	</div>
 </div>
+</article>
 
 
 </div>
 
 <article id="Eventi">
-<div class="container-fluid text-center">
+<div class="container-fluid text-center" style=" height: 200px;">
 <p><h3>Eventi</h3></p>
 </div>
 </article>
 
 <article id="Scuole">
-<div class="container-fluid text-center">
-<p><h3>Scuole</h3></p>
-<div id="map_div" style="width: 800px; height: 600px"></div>
+<div class="container-fluid text-center" style=" height: 200px;">
+<p><h3>SCUOLE</h3></p>
+Metto qui la lista delle scuole
+<div id="map_div"></div>
 </article>
 
 
-<article id="Mappa">
-<div id="map" style="width: 800px; height: 600px"></div>
-<!-- c'è il modo di visualizzare la mappa direttamente senza fare click? come si mette id? -->
-<div>Mappa 
-<button onclick="mappa()">Visualizza la mappa</button></div>
-</div>
+<article id="Map">
+
+	<div class="container-fluid text-center">
+		<p><h3>Mappa</h3></p>
+		<button onclick="mappa()">Visualizza la mappa</button>
+		<div id="map" style="position: relative; top: 0; left: 0; width: 100%; height: 100%;">
+		
+		</div>
+		
+		<!-- <button onclick="mappa()">Visualizza la mappa</button>
+		c'è il modo di visualizzare la mappa direttamente senza fare click? come si mette id? -->
+	</div>
+	
 </article>
 
 
-<article id="Mappa">
-<div class="container-fluid text-center">
+<article id="CercaEvento">
+<div class="container-fluid text-center" style=" height: 200px;">
 <p><h5>Cerca per parole chiave</h5></p>
 
 </div>
 </article>
 
 <!-- VISIBILE SOLO AGLI AMMINISTRATORI -->
-
+<%if(admin==true){ %>
 <article id="Aggiungi utente">
-<div class="container-fluid text-center">
+<div class="container-fluid text-center" style=" height: 200px;">
 
 <p><h5>Aggiungi utente</h5></p>
 
-
-</div>
-</article>
-
-<p><h5>Vedi password utenti</h5></p>
-
-
-</div>
-</article>
-</div>
-
-<%if(admin==true){ %>
 <h5>Inserisci i dati dell'utente che vuoi aggiunere</h5>
 <!-- DEVO MANDARLO A login.java, facendo una servlet di quello -->
 <form method="post" id="newUser" action="/helloTesina01">
@@ -547,8 +514,9 @@ font-size: 20px;
 <label for="psw" style="width:80px;"><b> Password </b></label>
 <input type="password" id="Password" placeholder="Enter Password" name="password" required><br/>
 </form>
+</div>
+</article>
 <%}%>
 
-</div>
 </body>
 </html>
