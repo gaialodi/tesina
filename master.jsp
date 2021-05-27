@@ -5,6 +5,8 @@
 <%@ page import= "com.google.appengine.api.users.*" %>
 <%@ page import="Tiw2021.Tesina00.*" %>
 <%@ page import="Tiw2021.Tesina00.login" %>
+<%@ page import="Tiw2021.Tesina00.DATI" %>
+
 	
 <head>
 <title>Prefettura e adolescenza</title>
@@ -332,11 +334,10 @@ font-size: 20px;
 		
 	}
 	
-	function getUser(){
-		String u= new String();
-		//u=getParameter(u);
+	function add(String username, String password){
+		login l = new login();
+		l.addUser(username, password);
 	}
-   
 
 </script>
 
@@ -352,9 +353,14 @@ font-size: 20px;
 	// pw = request.getParameter("password");
 	//if(user != null){ //qui dovrei controllare la password ma come si faaaaaaaa
 	String user=(String)session.getAttribute("username");
-	String us=(String)session.getAttribute("usDB");
-	String pw=(String)session.getAttribute("pwDB");
-	boolean admin=(boolean)session.getAttribute("admDB");
+	String usDB=(String)session.getAttribute("usDB");
+	String pwDB=(String)session.getAttribute("pwDB");
+	boolean adminDB=(boolean)session.getAttribute("admDB");
+	String queryPrep = (String) session.getAttribute("prepQuery"); // così prendo la query che ho preparato trasformata in una stringa
+	//DATI d = new DATI();
+	//int ore = d.getOre(1);
+	//ore=request.getParameter(name)
+	String ore = (String) session.getAttribute("ore");
 	%>
 	
 	<div id="main">
@@ -388,13 +394,16 @@ font-size: 20px;
 	//String u = usServ.getCurrentUser().getNickname(); //questo è l'username?
 	//se username e pw sono giusti voglio andare in un'altra pagina che mi dice che non posso entrare perchè le credenziali sono sbagliate
 	%>
-	<h3>Stringa che esce dalla query. pw:<%=pw%> username:<%=user%> admin:<%=admin%></h3>
-	<h3>Sei nel master.jsp</h3>
+	<h4>Stringa che esce dalla query: name:<%=usDB%> pw:<%=pwDB%> admin:<%=adminDB%></h4>
+	<h4>Query convertita in stringa: <%=queryPrep %></h4>
+	<h4>Sei nel master.jsp
+	username inserito:<%=user%>
+	ore totali di eventi: <%=ore%></h4>
 	
 	<div class="container-fluid text-center">
 		<p><h3>Benvenuto <%=user%> nella pagina della Prefettura!</h3></p>
 		<p>Qui puoi inserire o consultare dati sugli eventi nella provincia di Reggio Emilia</p>
-		<%if(admin==true){ %>
+		<%if(adminDB==true){ %>
 		<p>per aggiungere un utenre vai in fondo alla pagina</p>
 		<%}%>
 	</div>
@@ -500,7 +509,7 @@ Metto qui la lista delle scuole
 </article>
 
 <!-- VISIBILE SOLO AGLI AMMINISTRATORI -->
-<%if(admin==true){ %>
+<%if(adminDB==true){ %>
 <article id="Aggiungi utente">
 <div class="container-fluid text-center" style=" height: 200px;">
 
@@ -513,6 +522,7 @@ Metto qui la lista delle scuole
 <input type="text" id="User" placeholder="Enter Username" name="username" required><br/>
 <label for="psw" style="width:80px;"><b> Password </b></label>
 <input type="password" id="Password" placeholder="Enter Password" name="password" required><br/>
+<button type="submit" onclick=add(username, password)>Aggiungi</button>
 </form>
 </div>
 </article>
