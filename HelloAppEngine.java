@@ -38,12 +38,7 @@ public class HelloAppEngine extends HttpServlet {
     response.setContentType("text/plain");
     response.getWriter().println("Hello App Engine - Standard using "
         + SystemProperty.version.get() + " Java " + properties.get("java.specification.version"));
-
-    
-    
   }
-  
-  
   
   public void doPost(HttpServletRequest request, HttpServletResponse response)
 	      throws IOException { 
@@ -53,15 +48,28 @@ public class HelloAppEngine extends HttpServlet {
 	    //response.sendRedirect("/master.jsp");  //Questo dovrebbe essere il nostro master
 	    //String ore = o.getOre(1).toString();
 	  
-	  	//CODICE GETADMIN dal database
 		boolean adminDB = false;
 		String userDB ="gaia";
 		String passDB="pw";
-		//String u = us.getCurrentUser().getNickname();
+		//ricevere i parametri: ho fatto una servlet con username e password
+		String usernInserita = request.getParameter("username"); //metto nome del campo che cerco di intercettare
+		String passwInserita = request.getParameter("password"); //metto nome del campo che cerco di intercettare
+		  
+		login log00 = new login();
+		log00.add();
+		//log00.addUser(usern, passw); //questo utente NON è un admin
+	    
+	  //recupero la sessione corrente
+	    HttpSession oldSession = request.getSession(false);
+	    if(oldSession!=null) {
+	    	oldSession.invalidate(); //invalida la sessione se esiste
+		}
+	    HttpSession currentSession = request.getSession(); //creo nuova sessione ( di defalut fa true
 		
+	  	//CODICE GETADMIN dal database		
 		DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
 		Query q = new Query("utenti"); // voglio la query su utenti
-		Filter f = new FilterPredicate("username",FilterOperator.EQUAL, userDB); // voglio l'username
+		Filter f = new FilterPredicate("username",FilterOperator.EQUAL, usernInserita); // voglio l'username
 		
 		q.setFilter(f);
 		PreparedQuery pq = ds.prepare(q);
@@ -77,7 +85,17 @@ public class HelloAppEngine extends HttpServlet {
 			  adminDB=(boolean) result.getProperty("admin");
 			}
 		
-		
+		currentSession.setAttribute("username", usernInserita);
+		currentSession.setAttribute("usDB", userDB);
+		currentSession.setAttribute("pwDB", passDB);
+		currentSession.setAttribute("admDB", adminDB);
+		//currentSession.setAttribute("ore", ore);
+		currentSession.setMaxInactiveInterval(5*60); //max 5 min di inattività
+		//DATI o = new DATI();
+		  //o.();
+		  //int oreTot= o.getOre(14);
+		  //currentSession.setAttribute("oreTot", oreTot);
+	    
 		
 		//GET utente che ha fatto login nella pagina
 		Filter f1 = new FilterPredicate("username",FilterOperator.EQUAL, userGiusta);
@@ -97,57 +115,19 @@ public class HelloAppEngine extends HttpServlet {
 		 response.getWriter().println(passGiusta);		
 		 response.getWriter().println(userGiusta);
 	  
-	  
 		  // da riga 26 a 39 VA QUI O IN login.java??'
-		  UserService us=UserServiceFactory.getUserService();
+		  //UserService us=UserServiceFactory.getUserService();
 		  //DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
-		  
-		//controllo così o con query?
-				if(us.isUserLoggedIn() && us.isUserAdmin()) {
-					 String usern = request.getParameter("username");
-					 String passw = request.getParameter("password");
-					Entity e = new Entity("utenti", usern); //la tabella si chiama.... e la chiave è l'username
-					e.setProperty("password", passw); // aggiungo la proprietà (colonna?)
-					e.setProperty("admin", true); //user NON è un admin
-					ds.put(e);
-				}
-				
-			
-			
-		  
-		  //ricevere i parametri: ho fatto una servlet con username e password
-		  String usernInserita = request.getParameter("username"); //metto nome del campo che cerco di intercettare
-		  String passwInserita = request.getParameter("password"); //metto nome del campo che cerco di intercettare
-		  
-		  login log00 = new login();
-		  log00.add();
-		  //log00.addUser(usern, passw); //questo utente NON è un admin
-		  
-		  if(userGiusta.equals(usernInserita) && passGiusta.equals(passwInserita)) {
+		  	  
+		  if(userDB.equals(usernInserita) && passDB.equals(passwInserita)) {
 			  // autenticazione è andata a buon fine
-			  
-			  //recupero la sessione corrente
-			  HttpSession oldSession = request.getSession(false);
-			  if(oldSession!=null) {
-				  oldSession.invalidate(); //invalida la sessione se esiste
-			  }
-			  HttpSession currentSession = request.getSession(); //creo nuova sessione ( di defalut fa true
-			  currentSession.setAttribute("username", usernInserita);
-			  currentSession.setAttribute("usDB", userDB);
-			  currentSession.setAttribute("pwDB", passDB);
-			  currentSession.setAttribute("admDB", adminDB);
-			  //currentSession.setAttribute("ore", ore);
-			  currentSession.setMaxInactiveInterval(5*60); //max 5 min di inattività
-			  //DATI o = new DATI();
-			  //o.();
-			  //int oreTot= o.getOre(14);
-			  //currentSession.setAttribute("oreTot", oreTot);
 			  response.sendRedirect("master.jsp");
-			  
+			  //response.sendRedirect("login1.jsp");
 		  }else {
 			  //se l'autenticazione fallisce
 			  response.sendRedirect("loginErrato.jsp");
 		  }
+		  	  
 		 
   }
   
