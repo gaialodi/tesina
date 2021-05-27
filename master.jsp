@@ -32,7 +32,6 @@
 	
 <style>
 
-
 .navbar-brand {
 	cursor: pointer;
 }
@@ -46,7 +45,9 @@
   font: montserrat;
   font-size: 12px;
   letter-spacing: 5px;
-}
+  background-color: #00326E;
+  color: white;
+  }
 
 
 .body{
@@ -333,11 +334,6 @@ font-size: 20px;
 		    .openPopup();
 		
 	}
-	
-	function add(String username, String password){
-		login l = new login();
-		l.addUser(username, password);
-	}
 
 </script>
 
@@ -357,10 +353,9 @@ font-size: 20px;
 	String pwDB=(String)session.getAttribute("pwDB");
 	boolean adminDB=(boolean)session.getAttribute("admDB");
 	String queryPrep = (String) session.getAttribute("prepQuery"); // così prendo la query che ho preparato trasformata in una stringa
-	//DATI d = new DATI();
-	//int ore = d.getOre(1);
+	DATI d = new DATI();;
+	String ore = request.getParameter("2018/2019");
 	//ore=request.getParameter(name)
-	String ore = (String) session.getAttribute("ore");
 	%>
 	
 	<div id="main">
@@ -370,55 +365,38 @@ font-size: 20px;
 	<nav class="navbar navbar-inverse navbar-default">
   	<div class="container">
    	 <div class="navbar-header ">
-   	   <li> 
-   	   <a class="navbar-brand" onclick="login()">Login</a>
-   	   </li>
    	 </div>
-   	 <ul class="nav navbar-nav">
-   	   <li class="active"><a href="#">Home</a></li>
+   	 <ul class="nav navbar-nav navbar-left">
+   	   <li><a href="#">Home</a></li>
  	 </ul>
     	 <ul class="nav navbar-nav navbar-right text-gray">
-    		<li><a href="#Spiegazione">SPIEGAZIONE</a></li>
       		<li><a href="#Dati">DATI</a></li>
       		<li><a href="#Grafici">GRAFICI</a></li>
     		<li><a href="#Eventi">EVENTI</a></li>
-      		<li><a href="#Mappa">MAPPA</a></li>
+      		<li><a href="#Map">MAPPA</a></li>
     	</ul>
   	</div>
 	</nav>
 	
-	<% 
-	//accedo a UserService
-	//UserService usServ = UserServiceFactory.getUserService();
-	//accedo al nickname dell'utente
-	//String u = usServ.getCurrentUser().getNickname(); //questo è l'username?
-	//se username e pw sono giusti voglio andare in un'altra pagina che mi dice che non posso entrare perchè le credenziali sono sbagliate
-	%>
-	<h4>Stringa che esce dalla query: name:<%=usDB%> pw:<%=pwDB%> admin:<%=adminDB%></h4>
-	<h4>Query convertita in stringa: <%=queryPrep %></h4>
-	<h4>Sei nel master.jsp
-	username inserito:<%=user%>
-	ore totali di eventi: <%=ore%></h4>
+	<h6>Stringa che esce dalla query: name:<%=usDB%> pw:<%=pwDB%> admin:<%=adminDB%></h6>
+	<h6>Query convertita in stringa: <%=queryPrep %></h6>
+	<h6>username inserito:<%=user%>
+	COSA STAMPA???: <%=d.getOre(ore)%></h6>
 	
 	<div class="container-fluid text-center">
-		<p><h3>Benvenuto <%=user%> nella pagina della Prefettura!</h3></p>
+	<p> <font size="10"> <FONT COLOR="#ff1a1a"> <font face=Arial> <h3> BENVENUTO <%=user%> NELLA PAGINA DELLA PREFETTURA! </h3> </font>  </FONT> </FONT>  </p>
+	<img src="stemmareggio.jpeg"  width="200" height="200">
+	<p><FONT COLOR="#ff1a1a">Se sei un utente registrato puoi fare il login cliccando il pulsante in alto a sinistra per inserire o consultare dati sugli eventi nella provincia di Reggio Emilia</p>
 		<p>Qui puoi inserire o consultare dati sugli eventi nella provincia di Reggio Emilia</p>
 		<%if(adminDB==true){ %>
-		<p>per aggiungere un utenre vai in fondo alla pagina</p>
+		<p>per aggiungere un utente vai in fondo alla pagina</p>
 		<%}%>
 	</div>
-	
-
-<article id="Spiegazione">
-<div class="container-fluid text-center" style=" height: 100px;">
-<h2>Spiegazione</h2>
-io la toglierei e metterei un'introduzione sotto al "Benvenuto" by Gaia
-</div>
-</article>
 
 <article id="Dati">
 <div class="container-fluid text-center" >
-<p><h3>DATI RACCOLTI</h3></p>
+<p><font size="6"> <FONT COLOR=" #000080"> <font face="Arial"><h3>DATI RACCOLTI</h3></font></font></font></p>
+<FONT COLOR="  #000080">
 
 <!-- CONTATORE -->
 	<div class="counter_wrapper">
@@ -453,14 +431,15 @@ io la toglierei e metterei un'introduzione sotto al "Benvenuto" by Gaia
 	</div>
 	<!-- FINE A CONTATORE -->
 
-
+<br>
 </div>
+<br>
 </article>
 
 
 <article id="Grafici">
 <div class="container-fluid text-center">
-<p><h3>Charts</h3></p>
+<p><font size="6"> <FONT COLOR=" #000080"> <font face="Arial"><h3>CHARTS</h3></font></font></font></p>
 <div class="row">
 	<div id="tbn" class="col-sm-12 textcenter">	 	
 		<div id="chart_div" style="width: 1000px; height: 500px; "></div>
@@ -473,22 +452,16 @@ io la toglierei e metterei un'introduzione sotto al "Benvenuto" by Gaia
 
 <article id="Eventi">
 <div class="container-fluid text-center" style=" height: 200px;">
-<p><h3>Eventi</h3></p>
+<p><font size="6"> <FONT COLOR=" #000080"> <font face="Arial"><h3>EVENTI</h3></font></font></font></p>
 </div>
-</article>
-
-<article id="Scuole">
-<div class="container-fluid text-center" style=" height: 200px;">
-<p><h3>SCUOLE</h3></p>
-Metto qui la lista delle scuole
-<div id="map_div"></div>
 </article>
 
 
 <article id="Map">
 
 	<div class="container-fluid text-center">
-		<p><h3>Mappa</h3></p>
+	<p><font size="6"> <FONT COLOR=" #000080"> <font face="Arial"><h3>MAPPA</h3></font></font></font></p>
+
 		<button onclick="mappa()">Visualizza la mappa</button>
 		<div id="map" style="position: relative; top: 0; left: 0; width: 100%; height: 100%;">
 		
@@ -503,6 +476,7 @@ Metto qui la lista delle scuole
 
 <article id="CercaEvento">
 <div class="container-fluid text-center" style=" height: 200px;">
+<p><font size="6"> <FONT COLOR=" #000080"> <font face="Arial"><h5>Cerca per parole chiave</h5></font></font></font></p>
 <p><h5>Cerca per parole chiave</h5></p>
 
 </div>
@@ -513,7 +487,7 @@ Metto qui la lista delle scuole
 <article id="Aggiungi utente">
 <div class="container-fluid text-center" style=" height: 200px;">
 
-<p><h5>Aggiungi utente</h5></p>
+<p><font size="6"> <FONT COLOR=" #000080"> <font face="Arial"><h5>Aggiungi utente</h5></font></font></font></p>
 
 <h5>Inserisci i dati dell'utente che vuoi aggiunere</h5>
 <!-- DEVO MANDARLO A login.java, facendo una servlet di quello -->
@@ -522,7 +496,7 @@ Metto qui la lista delle scuole
 <input type="text" id="User" placeholder="Enter Username" name="username" required><br/>
 <label for="psw" style="width:80px;"><b> Password </b></label>
 <input type="password" id="Password" placeholder="Enter Password" name="password" required><br/>
-<button type="submit" onclick=add(username, password)>Aggiungi</button>
+<button type="submit">Aggiungi</button>
 </form>
 </div>
 </article>
