@@ -1,9 +1,15 @@
 package Tiw2021.Tesina00;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
@@ -22,12 +28,28 @@ import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
-public class login {
-	
-	HashMap <String, String> login = new HashMap<String, String>();
+@WebServlet(name = "login", value = {"/helloTesina01"}) 
+
+public class login extends HttpServlet{
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+		      throws IOException {
+		//per vedere cosa c'è nel DB: http://localhost:8080/_ah/admin/datastore?
+		 //aggiungo url con questo metodo, ma io voglio aggiungere gli USERS
+				String usern = request.getParameter("username"); //metto nome del campo che cerco di intercettare
+				String psw = request.getParameter("password");
+				Entity e = new Entity("utenti", usern); //la tabella si chiama.... e la chiave è l'username
+				e.setProperty("username", usern);
+				e.setProperty("password", psw); // aggiungo la proprietà (colonna?)
+				e.setProperty("admin", false); //user NON è un admin
+				ds.put(e);
+				response.sendRedirect("master.jsp");
+		
+	}
 	
 	private UserService us;
 	private DatastoreService ds;
+	
+	//ora devo mettere il metodo doPost che riceve i dati del form nel master in cui admin aggiunge gli utenti
 	
 	
 	
@@ -111,12 +133,10 @@ public class login {
 			adminDB=true;
 		}else {
 			adminDB = false;
-		}
-		
-		
+		}		
 		//se nel db ho che l'uente è un admin metto admin DB == true
 		//adminDB
-		if (adminFunction == true && adminDB == true) {
+		if (/*adminFunction == true &&*/ adminDB == true) {
 			return true;
 		}
 		else {
@@ -124,35 +144,6 @@ public class login {
 		}
 	
 	}
-	
-	
-	//forse non serve
-	public String getLoginUrl(String username, String password) throws EntityNotFoundException { //metodo per fare login
-		
-		//voglio prendere l'elemento con un dato username ma io NON so la password!
-		if(ds != null) { //ds.get(username) != null && password==ds.get(username).toString()
-			//probabilmente lo devo inviare a master.jsp e non a master.html
-			if(us.isUserLoggedIn()) {
-				return us.createLoginURL("/master.jsp");
-			}
-			return null;
-		}else {
-			return null;
-		}
-	}	
-	
-	//VA QUI O IN HelloAppEngine????????????
-	/*public void addUser(String username, String psw) { //aggiungo url con questo metodo, ma io voglio aggiungere gli USERS
-		//controllo così o con query?
-		if(us.isUserLoggedIn() && us.isUserAdmin()) {
-			
-			Entity e = new Entity("utenti", username); //la tabella si chiama.... e la chiave è l'username
-			e.setProperty("password", psw); // aggiungo la proprietà (colonna?)
-			e.setProperty("admin", false); //user NON è un admin
-			ds.put(e);
-		}
-		
-	}*/
 	
 	public String list() { // estrae tutte le proprietà della tabella(tutti gli url)FORSE NON SERVE! perchè non voglio vedere i dati di tutti gli users!
 		if(us.isUserLoggedIn() ) { //qui potrei aggiungere && us.isUserAdmin()
@@ -180,8 +171,6 @@ public class login {
 		}
 	}
 	
-	
-	
 	/*boolean log(String username, String password) {
 		login.put("gaia.lodi", "pw1");
 		login.put("andrea.pergreffi", "pw2");
@@ -195,8 +184,4 @@ public class login {
 			}
 		} else return false;*/
 		
-	
-	
-	
-
 }
