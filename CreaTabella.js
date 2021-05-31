@@ -166,47 +166,46 @@ let a=document.getElementById("scuola");
 	a.innerText= chiave
 
 }
+
+function rimuovi_duplicati(data) {
+	return data.filter((value, index) => data.indexOf(value) === index;	// Presa da stackoverflow
+}
 function drawVisualization() {
 		
 	   google.charts.load('current', {'packages':['corechart']});
        google.charts.setOnLoadCallback(drawVisualization);
-	   const anni = []
-	   let buffer = 0
-	   // Supponendo che gli eventi siano stati aggiunti in ordine cronologico
-	   // Crea un array che indica quanti eventi dell'anno 2018/2019 sono presenti e così via
-	   for(let evento=0; evento < eventi.length; evento++) {
-		   if eventi[evento].AS != buffer {
-			   anni.push(evento)
-		   }
-		   buffer = eventi[evento].AS
-		   
-	   }
+	   let anni = [];
 	   
-      let n_studenti = []
-	  let n_ore = []
-	  let eventi_totali = []
-	  
-	  for (let anno=0; anno < anni.length; anno++) {
-			n_studenti.push(0)
-			n_ore.push(0)
-			eventi_totali.push(0)
-			
-		  for (let i=0; i >= anni[anno]; evento++) {
-			  n_studenti.[anno] += eventi[i].n_studenti
-			  n_ore.push[anno] += eventi[i].numero_ore
-			  eventi_totali[anno] += 1
-			}
-	  }
-	  
-		let table = new Array()('2018/2019', '2019/2020', '2020/2021', '2021/2022')
+		for(let evento=0; i < eventi.length; i++) {
+			anni.push(eventi[evento].AS)
+		}
+		
+		anni = rimuovi_duplicati(anni)
+		
+		let studenti = []
+		let ore = []
+		let eventi = []
+		
+		for(let anno=0; anno < anni.length; anno++) {
+			studenti.push(0)
+			ore.push(0)
+			eventi.push(0)
+		}
+		
+		for(let evento=0; evento < eventi.length; evento++) {
+			studenti[anno.indexOf(eventi[evento].AS)] += eventi[evento].numero_studenti_coinvolti
+			ore[anno.indexOf(eventi[evento].AS)] += eventi[evento].numero_ore
+			eventi[anno.indexOf(eventi[evento].AS)] += 1
+		}
+		
+		// Anni = 		[2018/2019, 2019/2020]
+		// Studenti = 	[240, 553]
+		// Ore = 		[21, 22]
+		// Eventi = 	[1, 4]
         let data = google.visuali
 		let years = new Arrayzation.arrayToDataTable([
           ['Year', 'Studenti coinvolti', 'Numero ore', 'Eventi svolti'],    
         ]);
-		
-		for (let anno=0; anno < anni.length; anno++) {
-			years.push([anni[anno], n_studenti[anno], n_ore[anno], eventi_totali[anno]])
-		}
 
         var options = {
           title : 'Monthly Coffee Production by Country',
