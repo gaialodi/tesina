@@ -6,7 +6,6 @@
 <%@ page import="Tiw2021.Tesina00.*" %>
 <%@ page import="Tiw2021.Tesina00.login" %>
 <%@ page import="Tiw2021.Tesina00.DATI" %>
-
 	
 <head>
 <title>Prefettura e adolescenza</title>
@@ -16,7 +15,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -25,6 +24,11 @@
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
    crossorigin=""></script>
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+  google.charts.load('current', {packages: ['corechart']});
+  //google.charts.setOnLoadCallback(drawChart);
+</script>
 
 <!-- #log modifica la barra di login
 .navbar modifica la barra di navigazione (in alto)
@@ -37,6 +41,11 @@
 }
 
 .navbar {
+
+position: fixed;
+top: 0;
+z-index: 999;
+width:100%;
   padding-top: 15px;
   padding-bottom: 15px;
   border: 0;
@@ -49,11 +58,16 @@
   color: white;
   }
 
+.container-fluid, container{
+padding-top: 60px;
+}
 
 .body{
+border-top:50px;
 background-color:MistyRose;
 margin-right:2px solid;
 padding-right:2px solid;
+font: montserrat;
 }
 
 .tbn{
@@ -124,7 +138,8 @@ hr.filetto_verticale {
 #num_1,
 #variazione_1,
 #total_1 {
-  color: #f38384;
+  color: #FF3366;
+  font-size: 20px;
 }
 
 #num_3,
@@ -138,6 +153,7 @@ font-size: 20px;
 #variazione_4,
 #total_4 {
   color: #ef4e63;
+  font-size: 25px;
 }
 
 #num_5_top,
@@ -149,7 +165,8 @@ font-size: 20px;
 #num_6_top,
 #variazione_6_top,
 #total_6_top {
-  color: #f38384;
+  color: #6633FF;
+  font-size: 25px;
 }
 
 #num_7_top,
@@ -161,7 +178,7 @@ font-size: 20px;
 #num_5_top,
 #num_6_top,
 #num_7_top {
-  font-weight: 400;
+  font-weight: 800;
 }
 
 #num_5,
@@ -242,78 +259,41 @@ font-size: 20px;
 
 </style>
 
-<!-- GRAFICO -->
-<script type="text/javascript">
 
-		//Diagramma per vedere gli ANNI e quanti eventi ogni anno
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawVisualization);
-      let data=localStorage.getItem("Eventi_letti")
-      //for(let i=0;i<data.length;i++)
-    	 // {
-    	 // document.write(data[i].Scuola)
-    	 // }
+ <script type="text/javascript">
+ //GRAFICO
+    /*google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Element", "Density", { role: "style" } ],
+        ["Copper", 8.94, "#b87333"],
+        ["Silver", 10.49, "silver"],
+        ["Gold", 19.30, "gold"],
+        ["Platinum", 21.45, "color: #e5e4e2"]
+      ]);
 
-      function drawVisualization() {
-        // Some raw data (not necessarily accurate)
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average'],
-          ['2004/05',  165,      938,         522,             998,           450,      614.6],
-          ['2005/06',  135,      1120,        599,             1268,          288,      682],
-          ['2006/07',  157,      1167,        587,             807,           397,      623],
-          ['2007/08',  139,      1110,        615,             968,           215,      609.4],
-          ['2008/09',  136,      691,         629,             1026,          366,      569.6]
-        ]);
+      //QUESTO SERVE PER SPECIFICARE LE ANNOTAZIONI DENTRO LE COLONNE
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
 
-        var options = {
-          title : 'Monthly Coffee Production by Country',
-          vAxis: {title: 'Quantity'},
-          hAxis: {title: 'Year'},
-          seriesType: 'bars',
-          series: {5: {type: 'line'}},
-          chartArea:{left:20,right:20,top:0,width:'50%',height:'75%'}
-        };
+      var options = {
+        title: "Density of Precious Metals, in g/cm^3",
+        width: 600,
+        height: 400,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("chart1_div"));
+      chart.draw(view, options);
+  }*/
 
-        var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
-       
-        chart.draw(data, options);
-      }
-      
-    </script>
-
-<script>
-
-//funzione di login
-	
-	//localStorage.setItem("Username","Marco")
-	//localStorage.setItem("Password","1234")
-
-	//Admin=(localStorage.getItem("Username"))
-	//Pw=(localStorage.getItem("Password"))
-
-	//var access=false
-	
-	function hide(){
-	$(document).ready(function(){
-		$("#log").css("visibility","hidden")
-		//$("#log").hide()
-	})
-	}
-	
-	function check(){
-		x=document.getElementById("User").value
-		   y=document.getElementById("Password").value
-		    if(x==Admin||y==Pw)
-		    {
-			   console.log("Login successful")
-		       access=true
-		    }
-		$(document).ready(function(){
-			$("#log").css("visibility","hidden")
-			//$("#log").show()
-		})
-	}
-	
+	//MAPPA
 	var lat=44.7007475271964;
 	var long=10.633781921287271;
 	
@@ -342,32 +322,23 @@ font-size: 20px;
 <body style="background-color:MistyRose;">
 <body>
 	<%
-	//login login0 = new login(); 
-	//String user = login0.getUs(); //quello che metto nel form in login0
-	//String pw =login0.getPw();
 	//user = request.getParameter("username");
 	// pw = request.getParameter("password");
-	//if(user != null){ //qui dovrei controllare la password ma come si faaaaaaaa
 	String user=(String)session.getAttribute("username");
 	String usDB=(String)session.getAttribute("usDB");
 	String pwDB=(String)session.getAttribute("pwDB");
 	boolean adminDB=(boolean)session.getAttribute("admDB");
-	String queryPrep = (String) session.getAttribute("prepQuery"); // così prendo la query che ho preparato trasformata in una stringa
-	DATI d = new DATI();;
-	String ore = request.getParameter("2018/2019");
+	//DATI d = new DATI();;
+	//String ore = request.getParameter("2018/2019");
 	//ore=request.getParameter(name)
 	%>
-	
 	<div id="main">
-	<input id="picker" type="file">
-	<script src="LETTURA_CODICE.js" ></script>
-
 	<nav class="navbar navbar-inverse navbar-default">
   	<div class="container">
    	 <div class="navbar-header ">
    	 </div>
-   	 <ul class="nav navbar-nav navbar-left">
-   	   <li><a href="#">Home</a></li>
+   	 <ul class="nav navbar-nav navbar-left text-gray">
+   	   <li><a href="">Home</a></li>
  	 </ul>
     	 <ul class="nav navbar-nav navbar-right text-gray">
       		<li><a href="#Dati">DATI</a></li>
@@ -379,9 +350,7 @@ font-size: 20px;
 	</nav>
 	
 	<h6>Stringa che esce dalla query: name:<%=usDB%> pw:<%=pwDB%> admin:<%=adminDB%></h6>
-	<h6>Query convertita in stringa: <%=queryPrep %></h6>
-	<h6>username inserito:<%=user%>
-	COSA STAMPA???: <%=d.getOre(ore)%></h6>
+	<h6>username inserito:<%=user%></h6>
 	
 	<div class="container-fluid text-center">
 	<p> <font size="10"> <FONT COLOR="#ff1a1a"> <font face=Arial> <h3> BENVENUTO <%=user%> NELLA PAGINA DELLA PREFETTURA! </h3> </font>  </FONT> </FONT>  </p>
@@ -394,6 +363,7 @@ font-size: 20px;
 	</div>
 
 <article id="Dati">
+
 <div class="container-fluid text-center" >
 <p><font size="6"> <FONT COLOR=" #000080"> <font face="Arial"><h3>DATI RACCOLTI</h3></font></font></font></p>
 <FONT COLOR="  #000080">
@@ -418,13 +388,13 @@ font-size: 20px;
 			<h2 class="timer count-number" id="num_3"><span id="scuola" ></span></h2>
 		</div>
 
-		<div class="counter col_1 filetto_verticale_top_dotted">
+		<div class="counter col_1 filetto_verticale_top">
 			<p class="count-text" id="count_text_1">TEMA<br>PRINCIPALE
 			</p>
 			<h2 class="timer count-number" id="num_1"><span id="tema_trattato" ></span></h2>
 		</div>
 
-		<div class="counter col_6_top filetto_verticale_top_dotted">
+		<div class="counter col_6_top filetto_verticale_top">
 			<p class="count-text" id="count_text_6_top">ORE<br>SVOLTE</p>
 			<h2 class="timer count-number" id="num_6_top"><span id="ore" ></span></h2>
 		</div>
@@ -438,29 +408,41 @@ font-size: 20px;
 
 
 <article id="Grafici">
+
 <div class="container-fluid text-center">
-<p><font size="6"> <FONT COLOR=" #000080"> <font face="Arial"><h3>CHARTS</h3></font></font></font></p>
+<p><font size="6"> <FONT COLOR=" #000080"> <font face="Arial"><h3>CHARTS          
+<span class="glyphicon glyphicon-stats"></span></h3></font></font></font></p>
 <div class="row">
-	<div id="tbn" class="col-sm-12 textcenter">	 	
-		<div id="chart_div" style="width: 1000px; height: 500px; "></div>
+	<div id="tbn" class="col-sm-4 text-center">	 	
+		<div id="chart1_div" style="width: 100%; height: 60%; "></div>
+	</div>
+	<div id="tbn" class="col-sm-4 text-center">	 	
+		<div id="chart2_div" style="width: 100%; height: 60%; "></div>
+	</div>
+	<div id="tbn" class="col-sm-4 text-center">	 	
+		<div id="chart3_div" style="width: 100%; height: 60%; "></div>
 	</div>
 </div>
 </article>
 
-
 </div>
 
 <article id="Eventi">
-<div class="container-fluid text-center" style=" height: 200px;">
-<p><font size="6"> <FONT COLOR=" #000080"> <font face="Arial"><h3>EVENTI</h3></font></font></font></p>
-</div>
+
+	<div class="container-fluid text-center" style=" height: 200px;">
+		<p><font size="6"> <FONT COLOR=" #000080"> <font face="Arial"><h3>EVENTI</h3></font></font></font></p>
+		Aggiungi un file con degli eventi:
+		<input id="picker" type="file">
+		<script src="LETTURA_CODICE.js" >
+		</script>
+	</div>
 </article>
 
 
 <article id="Map">
 
 	<div class="container-fluid text-center">
-	<p><font size="6"> <FONT COLOR=" #000080"> <font face="Arial"><h3>MAPPA</h3></font></font></font></p>
+	<p><font size="6"> <FONT COLOR=" #000080"> <font face="Arial"><h3><span class="glyphicon glyphicon-map-marker"></span>          MAPPA</h3></font></font></font></p>
 
 		<button onclick="mappa()">Visualizza la mappa</button>
 		<div id="map" style="position: relative; top: 0; left: 0; width: 100%; height: 100%;">
