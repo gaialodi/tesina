@@ -1,24 +1,27 @@
+//google.charts.load('current', {'packages':['corechart']});
+//google.charts.setOnLoadCallback(drawVisualization);
+let data=localStorage.getItem("Eventi_letti")
+
 const reader=new FileReader()
 var i =0
 var eventi=[]   //array di oggetti contenente i dati del file
 
 class evento{
-	constructor(AS,Scuola,Comune,Grado,Titolo_Progetto,Periodo,Formatore,numero_ore,numero_studenti_coinvolti,età_partecipanti,Parola_chiave)
+	constructor(AS,Scuola,Comune,Indirizzo,Grado,Titolo_Progetto,Periodo,Formatore,numero_ore,numero_studenti_coinvolti,età_partecipanti,Parola_chiave)
 	{
-		this.AS = AS;
-		this.Scuola = Scuola;
-		this.Comune = Comune;
-		this.Grado = Grado;
-		this.Titolo_Progetto = Titolo_Progetto;
-		this.Periodo=Periodo;
-		this.Formatore = Formatore;
-		this.numero_ore = numero_ore;
-		this.numero_studenti_coinvolti = numero_studenti_coinvolti;
-		this.età_partecipanti = età_partecipanti;
-		this.Parola_chiave = Parola_chiave;
+		this.AS = AS; //colonna0
+		this.Scuola = Scuola; //colonna1
+		this.Comune = Comune; //colonna 2
+		this.Indirizzo = Indirizzo; //colonna 3
+		this.Grado = Grado; //colonna4
+		this.Titolo_Progetto = Titolo_Progetto; //colonna5
+		this.Periodo=Periodo; //colonna 6 (6 e 7 del file)
+		this.Formatore = Formatore; //colonna 7
+		this.numero_ore = numero_ore; //colonna 8
+		this.numero_studenti_coinvolti = numero_studenti_coinvolti; //colonna 9
+		this.età_partecipanti = età_partecipanti; //colonna 10(12 e 13 del file)
+		this.Parola_chiave = Parola_chiave; //colonna 11
 	}
-	
-	
 	
 }  //costruttore della classe evento
 
@@ -30,6 +33,7 @@ reader.onload = function()
 	console.log(lines[1][0]);
 	console.log(lines[1][1]);
 	console.log(lines[1][2]);
+	console.log(lines[1][3]);
 	console.log(lines[1][4]);
 	console.log(lines[1][5]);
 	console.log(lines[1][6]);
@@ -40,33 +44,40 @@ reader.onload = function()
 	console.log(lines[1][11]);
 	console.log(lines[1][12]);
 	console.log(lines[1][13]);
+
 	
-	for(i=1;i<lines.length;i++)
+	for(i=0;i<lines.length;i++)
 	{
 		e = new evento(
-			lines[i][0],
-			lines[i][1],
+			lines[i][0], //colonna 0 - AS
+			lines[i][1], //colonna 1 - scuola
 			lines[i][2],
+			lines[i][3],
 			lines[i][4],
 			lines[i][5],
-			lines[i][6]+"al"+lines[i][7],
+			lines[i][6]+" a "+lines[i][7],
 			lines[i][8],
 			lines[i][9],
 			lines[i][10],
-			lines[i][11]+"a"+lines[i][12],
-			lines[i][13],
+			lines[i][11]+" a "+lines[i][12],
+			lines[i][13]
 		);
 		eventi.push(e);
 	}
 	
-	//console.log(eventi[0].AS+"\n"+eventi[1].AS)
-    //console.log(eventi.length)
-	run_event();
+	console.log(eventi[0].AS+"\n"+eventi[10].AS)
+    console.log(eventi.length)
+	//run_event();
+	numero_partecipanti();
+	ore_svolte();
+	eventi_svolti();
+	tema();
+	scuola_virtuosa();
+	drawVisualization();
 }
 
-
 const filePicker = document.getElementById('picker');
-filePicker.onchange = function(){
+filePicker.onchange = function r(){
 	let file = this.files[0];
 	reader.readAsText(file);
 }
@@ -77,12 +88,8 @@ function run_event() {
 	eventi_svolti();
 	tema();
 	scuola_virtuosa();
-	data_visualization();
-	
+	drawVisualization();
 }
-
-
-
 
 function eventi_svolti() {
 	let c = document.getElementById("contatore_eventi");
@@ -106,7 +113,6 @@ function ore_svolte(){
 		num_ore += Number(eventi[i].numero_ore);
 		
 	s.innerText= num_ore
-
 }
 
 function tema(){
@@ -114,13 +120,10 @@ let a=document.getElementById("tema_trattato");
 	let tema= 0;
 	let cont=0
 	let chiave=""
-	for(i = 0; i < eventi.length; i++)
-		{
+	for(i = 0; i < eventi.length; i++){
 		cont=0;
-			for(n=0 ; n<eventi.length; n++)
-			{
-				if(eventi[i].Parola_chiave==eventi[n].Parola_chiave)
-				{
+			for(n=0 ; n<eventi.length; n++){
+				if(eventi[i].Parola_chiave==eventi[n].Parola_chiave){
 				cont+=1
 				}
 			
@@ -133,9 +136,7 @@ let a=document.getElementById("tema_trattato");
 		
 		}
 		
-		
 	a.innerText= chiave
-
 }
 
 function scuola_virtuosa(){
@@ -143,14 +144,11 @@ let a=document.getElementById("scuola");
 	let scuola= 0;
 	let cont=0
 	let chiave=""
-	for(i = 0; i < eventi.length; i++)
-		{
+	for(i = 0; i < eventi.length; i++){
 		cont=0;
-			for(n=0 ; n<eventi.length; n++)
-			{
-				if(eventi[i].Scuola==eventi[n].Scuola)
-				{
-				cont+=1
+			for(n=0 ; n<eventi.length; n++){
+				if(eventi[i].Scuola==eventi[n].Scuola){
+					cont+=1
 				}
 			
 			}
@@ -159,55 +157,128 @@ let a=document.getElementById("scuola");
 				tema=cont
 				chiave=eventi[i].Scuola
 			}
+	}
+	a.innerText= chiave
+}
+
+//function rimuovi_duplicati(data) {
+	//return data.filter((value, index) => data.indexOf(value) === index);	// Presa da stackoverflow
+//}
+
+google.charts.setOnLoadCallback(drawVisualization);
+function drawVisualization() {
 		
+	   //google.charts.load('current', {'packages':['corechart']});
+       //google.charts.setOnLoadCallback(drawVisualization);
+	   let anni = [];
+	   
+		for(let evento=0; evento < eventi.length; evento++) { //INSERISCO gli anni 
+			if(anni.indexOf(eventi[evento].AS) == -1){
+				anni.push(eventi[evento].AS)
+			}
+			
 		}
 		
+		console.log(anni);
 		
-	a.innerText= chiave
+		//creo le variabili
+		let studenti = []
+		let ore = []
+		let eventiTot = []
+		
+		//per ogni anno inserisco uno 0 nell'array (es. se ho 5 anni avrò un vettore lungo 5)
+		for(let anno=0; anno < anni.length; anno++) {
+			studenti.push(0)
+			ore.push(0)
+			eventiTot.push(0)
+		}
+		
+		for(let evento=0; evento < eventi.length; evento++) {
+		//eventi[evento].AS è l'anno scolastico dell'evento corrente
+			studenti[anni.indexOf(eventi[evento].AS)] += Number(eventi[evento].numero_studenti_coinvolti)
+			ore[anni.indexOf(eventi[evento].AS)] += Number(eventi[evento].numero_ore)
+			eventiTot[anni.indexOf(eventi[evento].AS)] += 1
+		}
+		console.log(eventi);
+		
+		// Anni = 		[2018/2019, 2019/2020]
+		// Studenti = 	[240, 553]
+		// Ore = 		[21, 22]
+		// Eventi = 	[1, 4]
 
-}
-function data_visualization()
-{
-	//Diagramma per vedere gli ANNI e quanti eventi ogni anno
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawVisualization);
-       let cont=0;
-       
-      for(let a=0;a<eventi.length;a++)
-      {
-      	if(eventi[a].AS=="2018/2019")
-      	{
-      		cont+=Number(eventi[a].numero_studenti_coinvolti);
-      	}
-      }
-      
+//GRAFICO 1
+        var data = new google.visualization.DataTable();
+        data.addColumn('string','Anni');
+        data.addColumn('number', 'Numero studenti');
 
-      function drawVisualization() {
-     
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Studenti coinvolti', 'Numero ore', 'Eventi svolti'],
-          ['2018/2019',  cont,      938,         522],
-          ['2019/2020',  135,      1120,        599],
-          ['2020/2021',  157,      1167,        587],
-          ['2021/2022',  139,      1110,        615],         
-        ]);
-
+		
+	
+		for(let anno=0; anno < anni.length; anno++) {
+			data.addRow([anni[anno], studenti[anno]])
+			}	
+			// 2018/2019, 240
+			// 2019/2020, 553
+			
         var options = {
-          title : 'Monthly Coffee Production by Country',
-          vAxis: {title: 'Quantity'},
+          title : 'Numero Studenti',
+          pieHole: 0.5,
+          vAxis: {title: 'Numero Studenti'},
           hAxis: {title: 'Year'},
           seriesType: 'bars',
           series: {5: {type: 'line'}},
-          chartArea:{left:20,right:20,top:0,width:'50%',height:'75%'},
-        };
+          chartArea:{left:40,right:20,top:50,width:'80%',height:'80%'},
+        }
+        
+        var chart1 = new google.visualization.PieChart(document.getElementById('chart1_div'));
+        chart1.draw(data, options);
+        
+//GRAFICO 2
+        var data2 = new google.visualization.DataTable();
+        data2.addColumn('string','Anni');
+		data2.addColumn('number', 'Ore Svolte');
+		
+		for(let anno=0; anno < anni.length; anno++) {
+			data2.addRow([anni[anno], ore[anno]])
+			}	
+			// 2018/2019, 21
+			// 2019/2020, 22
+			
+        var options2 = {
+          title : 'Ore svolte',
+          vAxis: {title: 'Ore'},
+          hAxis: {title: 'Year'},
+          seriesType: 'bars',
+          series: {5: {type: 'line'}},
+          chartArea:{left:40,right:20,top:50,bottom:50,width:'100%',height:'100%'},
+        }
+        //oppure line chart
+        var chart2 = new google.visualization.ColumnChart(document.getElementById('chart2_div'));
+        chart2.draw(data2, options2);
 
-        var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
-       
-        chart.draw(data, options);
-      }
-	
-	}
-
+//GRAFICO 3
+        var data3 = new google.visualization.DataTable();
+        data3.addColumn('string','Anni');
+		data3.addColumn('number', 'Eventi totali');
+		
+		for(let anno=0; anno < anni.length; anno++) {
+			data3.addRow([anni[anno], eventiTot[anno]])
+			}	
+			// 2018/2019, 1
+			// 2019/2020, 4
+			
+        var options3 = {
+          title : 'Eventi svolti',
+          is3D: true,
+          vAxis: {title: 'Eventi'},
+          hAxis: {title: 'Year'},
+          seriesType: 'bars',
+          series: {5: {type: 'line'}},
+          chartArea:{left:40,right:20,top:50,bottom:50,width:'100%',height:'100%'}
+        }
+        
+        var chart3 = new google.visualization.PieChart(document.getElementById('chart3_div'));
+        chart3.draw(data3, options3);
+ }
 
 
 
